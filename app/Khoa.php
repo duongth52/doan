@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Khoa extends Model
 {
     protected $table = 'khoa';
-    public $timestamps = false;
+    // $timestamps = false;
     //
 }

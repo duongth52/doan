@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\BacSi;
+// use App\User;
+
 use App\Khoa;
+use App\User;
 use Illuminate\Http\Request;
 class BacSiController extends Controller
 {
     public function getALL()
     {
-        $obj = BacSi::all();
+        $obj = User::all();
         return view('admin.bacsi.danhsachnhanvien', compact('obj'));
     }
 
@@ -24,7 +26,7 @@ class BacSiController extends Controller
 
 
         $validatedData = $request->validate([
-            'email' => 'required|email|unique:bacsi,email|max:255',
+            'email' => 'required|email|unique:users,email|max:255',
             'name' => 'required',
             'phone' => 'required|min:11|max:11',
             // 'image' => 'required|mimes:jpeg,bmp,png',
@@ -41,7 +43,8 @@ class BacSiController extends Controller
         ]);
 
         $pathImg = '';
-        $dataUp = new BacSi;
+
+        $dataUp = new User;
         $namefile = '';
         if ($request->hasFile('avatar')) {
 
@@ -58,17 +61,15 @@ class BacSiController extends Controller
             }
         }
 
-        $dataUp->id = 1;
         $dataUp->name = $request->name;
-        $dataUp->sdt = $request->phone;
+        $dataUp->phone = $request->phone;
         $dataUp->email = $request->email;
         $dataUp->image = $pathImg;
-        $dataUp->gioitinh = $request->gioitinh;
-        $dataUp->diachi = $request->diachi;
-        $dataUp->ngaysinh = $request->ngaysinh;
-        $dataUp->gioitinh = $request->gioitinh;
+        // $dataUp->gender = $request->gioitinh;
+        $dataUp->address = $request->diachi;
+        $dataUp->birthday = $request->ngaysinh;
         if($dataUp->save()){
-            return redirect()->route('list')->with('message', 'success');
+            return redirect()->route('danhsachnhanvien')->with('message', 'success');
         }
     }
 
@@ -77,15 +78,14 @@ class BacSiController extends Controller
 
         $khoa = Khoa::all();
 
-        $find = BacSi::findOrFail($id);
+        $find = User::findOrFail($id);
 
         return view('admin.bacsi.suanhanvien', compact('find', 'khoa'));
-        //$model = BacSi::find($id);
     }
 
     public function update($id, Request $request)
     {
-        $dataUp = BacSi::find($id);
+        $dataUp = User::find($id);
         $dataUp->name = $request->name;
         $dataUp->sdt = $request->phone;
         $dataUp->email = $request->email;
@@ -101,7 +101,7 @@ class BacSiController extends Controller
 
     public function delete($id)
     {
-        BacSi::destroy($id);
+        User::destroy($id);
         return redirect('/danh-sach-nhan-vien');
     }
 }
