@@ -23,14 +23,13 @@ class BacSiController extends Controller
 
     public function postAdd(Request $request)
     {
-
-
+        // dd($request);
         $validatedData = $request->validate([
             'email' => 'required|email|unique:users,email|max:255',
             'name' => 'required',
             'phone' => 'required|min:11|max:11',
-            // 'image' => 'required|mimes:jpeg,bmp,png',
-            'ngaysinh' => 'required',
+         //   'image' => 'mimes:jpeg,jpg,png',
+            'birthday' => 'required',
         ],
         [
             'email.required' => 'Bạn chưa nhập email',
@@ -38,13 +37,13 @@ class BacSiController extends Controller
             'email.unique'  => 'Email này đã tồn tại.',
             'name.required' => 'Bạn chưa nhập name.',
             'phone' => 'required|min:10|max:11',
-            // 'image.mimes'   => 'Avatar chưa đúng định dạng.',
-            'ngaysinh.required' => 'Ngày sinh không được trống.'
+           // 'image.mimes'   => 'Avatar chưa đúng định dạng.',
+            'birthday.required' => 'Ngày sinh không được trống.'
         ]);
 
         $pathImg = '';
 
-        $dataUp = new User;
+        $dataCreate = new User;
         $namefile = '';
         if ($request->hasFile('avatar')) {
 
@@ -61,14 +60,14 @@ class BacSiController extends Controller
             }
         }
 
-        $dataUp->name = $request->name;
-        $dataUp->phone = $request->phone;
-        $dataUp->email = $request->email;
-        $dataUp->image = $pathImg;
-        // $dataUp->gender = $request->gioitinh;
-        $dataUp->address = $request->diachi;
-        $dataUp->birthday = $request->ngaysinh;
-        if($dataUp->save()){
+        $dataCreate->name = $request->name;
+        $dataCreate->phone = $request->phone;
+        $dataCreate->email = $request->email;
+        $dataCreate->image = $pathImg;
+        $dataCreate->gender = $request->gioitinh;
+        $dataCreate->address = $request->diachi;
+        $dataCreate->birthday = $request->birthday;
+        if($dataCreate->save()){
             return redirect()->route('danhsachnhanvien')->with('message', 'success');
         }
     }
@@ -87,12 +86,12 @@ class BacSiController extends Controller
     {
         $dataUp = User::find($id);
         $dataUp->name = $request->name;
-        $dataUp->sdt = $request->phone;
+        $dataUp->phone = $request->phone;
         $dataUp->email = $request->email;
         $dataUp->image = $request->image;
-        $dataUp->diachi = $request->diachi;
-        $dataUp->ngaysinh = $request->ngaysinh;
-        $dataUp->gioitinh = $request->gioitinh;
+        $dataUp->address = $request->address;
+        $dataUp->birthday = $request->birthday;
+        $dataUp->gender = $request->gender;
 
         if ($dataUp->save()) {
             return redirect()->route('danhsachnhanvien')->with('message', 'success');

@@ -25,7 +25,7 @@
                     </div>
                     <div class="form-group">
                         <label>Số điện thoại <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại" value="{!!$find->sdt!!}">
+                        <input type="text" class="form-control" name="phone" placeholder="Nhập số điện thoại" value="{!!$find->phone!!}">
                     </div>
                     <div class="form-group">
                         <label>Email <span class="text-danger">*</span></label>
@@ -33,16 +33,16 @@
                     </div>
                     <div class="form-group" style="max-width: 50%">
                         <label>Ngày sinh <span class="text-danger">*</span></label>
-                        <input type="text" class="js-datepicker form-control" id="example-datepicker2" name="ngaysinh" value="{{$find->ngaysinh}}" data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="dd/mm/yy" placeholder="dd/mm/yy">
+                        <input type="text" class="js-datepicker form-control" id="example-datepicker2" name="birthday" value="{{$find->birthday}}" data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="dd/mm/yy" placeholder="dd/mm/yy">
                     </div>
                     <div class="form-group">
                         <label class="d-block">Giới tính <span class="text-danger">*</span></label>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="example-rd-custom-inline2" name="gioitinh" value="1" checked>
+                            <input type="radio" class="custom-control-input" id="example-rd-custom-inline2" name="gender" value="nam"  {{$find->gender === 'nam' ? 'checked' : ''}}>
                             <label class="custom-control-label">Nam </label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="example-rd-custom-inline3" name="gioitinh" value="0">
+                            <input type="radio" class="custom-control-input" id="example-rd-custom-inline3" name="gender" value="nu" {{$find->gender === 'nu' ? 'checked' : ''}}>
                             <label class="custom-control-label">Nữ</label>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group">
                         <label>Địa chỉ <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="diachi" placeholder="Nhập địa chỉ" value="{{$find->diachi}}">
+                        <input type="text" class="form-control" name="address" placeholder="Nhập địa chỉ" value="{{$find->address}}">
                     </div>
                     <div class="form-group">
                         <label>Khoa khám bệnh <span class="text-danger">*</span></label>
