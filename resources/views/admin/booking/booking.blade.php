@@ -41,30 +41,33 @@
         <table class="table table-bordered table-striped table-vcenter js-dataTable-simple">
             <thead>
                 <tr>
-                    <th class="text-center" style="width: 60px;">STT</th>
+                    <!-- <th class="text-center" style="width: 60px;">STT</th> -->
                     <th class="text-center" style="width: 10%;">Mã BN</th>
                     <th class="text-center">Tên bệnh nhân</th>
                     <th class="text-center" style="width: 10%;">SĐT</th>
                     <th class="text-center">Tên bác sĩ</th>
-                    <th class="text-center" style="width: 10%;">Khoa</th>
+                    <th class="text-center" style="width: 5%;">Khoa</th>
                     <th class="text-center" style="width: 12%;">Ngày khám</th>
+                    <th class="text-center" style="width: 10%;">Giờ khám</th>
                     <th class="text-center" style="width: 15%;">Ghi chú</th>
                     <th class="text-center">Hành động</th>
                 </tr>
             </thead>
             <tbody>
+            @foreach($booking as $data)
                 <tr>
-                    <td class="text-center">1</td>
-                    <td class="text-center">BN1243</td>
+                    <td class="text-center">{{$data->id}}</td>
+                    <!-- <td class="text-center">BN1243</td> -->
                     <td class="font-w600 font-size-sm">
-                        <a href="be_pages_generic_profile.html">Nguyễn Văn Đạt</a>
+                        <a href="be_pages_generic_profile.html">{{$data->name}}</a>
                     </td>
-                    <td class="font-size-sm">0978019699</td>
-                    <td class="font-size-sm">Nguyễn Văn A</td>
-                    <td class="font-size-sm">Nhi</td>
-                    <td> 20/02/2019 </td>
+                    <td class="font-size-sm">{{$data->phone}}</td>
+                    <td class="font-size-sm">{{$data->doctorName}}</td>
+                    <td class="font-size-sm">{{$data->khoaName}}</td>
+                    <td> {{$data->book_date}} </td>
+                    <td> {{$data->time}} </td>
                     <td>
-                        Nội dung ghi chú
+                       {{$data->note}}
                     </td>
                     <td class="text-center">
                         <div class="btn-group">
@@ -80,87 +83,8 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td class="text-center">BN1243</td>
-                    <td class="font-w600 font-size-sm">
-                        <a href="be_pages_generic_profile.html">Nguyễn Văn Đạt</a>
-                    </td>
-                    <td class="font-size-sm">0978019699</td>
-                    <td class="font-size-sm">Nguyễn Văn A</td>
-                    <td class="font-size-sm">Nhi</td>
-                    <td> 20/02/2019 </td>
-                    <td>
-                        Nội dung ghi chú
-                    </td>
-                    <td class="text-center">
-                        <div class="btn-group">
-                            <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
-                                <i class="far fa-eye"></i>
-                            </button>
-                            <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
-                                <i class="fa fa-fw fa-pencil-alt"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete">
-                                <i class="fa fa-fw fa-times"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td class="text-center">BN1243</td>
-                    <td class="font-w600 font-size-sm">
-                        <a href="be_pages_generic_profile.html">Nguyễn Văn Đạt</a>
-                    </td>
-                    <td class="font-size-sm">0978019699</td>
-                    <td class="font-size-sm">Nguyễn Văn A</td>
-                    <td class="font-size-sm">Nhi</td>
-                    <td> 20/02/2019 </td>
-                    <td>
-                        Nội dung ghi chú
-                    </td>
-                    <td class="text-center">
-                        <div class="btn-group">
-                            <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
-                                <i class=" far fa-eye"></i>
-                            </button>
-                            <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
-                                <i class="fa fa-fw fa-pencil-alt"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete">
-                                <i class="fa fa-fw fa-times"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td class="text-center">BN1243</td>
-                    <td class="font-w600 font-size-sm">
-                        <a href="be_pages_generic_profile.html">Nguyễn Văn Đạt</a>
-                    </td>
-                    <td class="font-size-sm">0978019699</td>
-                    <td class="font-size-sm">Nguyễn Văn A</td>
-                    <td class="font-size-sm">Nhi</td>
-                    <td> 20/02/2019 </td>
-                    <td>
-                        Nội dung ghi chú
-                    </td>
-                    <td class="text-center">
-                        <div class="btn-group">
-                            <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
-                                <i class=" far fa-eye"></i>
-                            </button>
-                            <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Edit">
-                                <i class="fa fa-fw fa-pencil-alt"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Delete">
-                                <i class="fa fa-fw fa-times"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+            @endforeach
+
             </tbody>
         </table>
     </div>

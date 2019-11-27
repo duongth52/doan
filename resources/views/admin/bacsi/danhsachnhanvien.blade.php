@@ -48,7 +48,7 @@
                         <td class="font-size-sm">{{$data->email}}</td>
                         <td class="font-size-sm">{{$data->sdt}}</td>
                         <td>
-                            {{ $data->gioitinh === "1" ? "Nam" : "Nữ" }}
+                            {{ $data->gioitinh ? "Nữ" : "Nam" }}
                         </td>
                         <!-- <td>
                             <span class="badge badge-success">Hoạt động</span>

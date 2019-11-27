@@ -1,15 +1,24 @@
 <?php
-
-Route::view('/', 'dashboard');
-Route::view('/danh-sach-booking', 'admin.booking');
-Route::view('/them-booking', 'admin.thembooking');
+//clinet
 
 
+Route::get('/home', 'bookingController@home');
+Route::get('/dat-lich-kham','bookingController@booking')->name('datlich');
+Route::post('/dat-lich-kham', 'bookingController@saveBooking');
+
+
+// admin
+
+//Route::view('/', 'dashboard');
+
+
+//booking
+Route::get('/danh-sach-booking', 'bookingController@index');
+Route::view('/them-booking', 'admin.booking.thembooking');
+
+//bẹnh nhân
 Route::view('/danh-sach-benh-nhan', 'admin.danhsachbenhnhan');
 Route::view('/them-benh-nhan', 'admin.thembenhnhan');
-
-
-
 
 Route::get('/danh-sach-nhan-vien', 'BacSiController@getALL')->name('danhsachnhanvien');
 Route::get('/them-nhan-vien', 'BacSiController@getAdd')->name('addnv');
