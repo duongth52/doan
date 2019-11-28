@@ -2,27 +2,21 @@
 
 namespace App\Http\Controllers;
 
-// use App\User;
-
 use App\Khoa;
 use App\User;
 use Illuminate\Http\Request;
-class BacSiController extends Controller
-{
-    public function getALL()
-    {
+class BacSiController extends Controller {
+    public function getALL() {
         $obj = User::all();
         return view('admin.bacsi.danhsachnhanvien', compact('obj'));
     }
 
-    public function getAdd()
-    {
+    public function getAdd() {
         $khoa = Khoa::all();
         return view('admin.bacsi.themnhanvien', compact('khoa'));
     }
 
-    public function postAdd(Request $request)
-    {
+    public function postAdd(Request $request) {
         $validatedData = $request->validate([
             'email' => 'required|email|unique:users,email|max:255',
             'name' => 'required',
@@ -47,7 +41,6 @@ class BacSiController extends Controller
         if ($request->hasFile('avatar')) {
 
             $file = $request->file('avatar');
-
             // lay ten file
             $namefile = $file->getClientOriginalName();
 
@@ -77,8 +70,7 @@ class BacSiController extends Controller
         return view('admin.bacsi.suanhanvien', compact('find', 'khoa'));
     }
 
-    public function update($id, Request $request)
-    {
+    public function update($id, Request $request) {
         $dataUp = User::find($id);
         $dataUp->name = $request->name;
         $dataUp->phone = $request->phone;
@@ -93,8 +85,7 @@ class BacSiController extends Controller
         }
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
         User::destroy($id);
         return redirect('/danh-sach-nhan-vien');
     }

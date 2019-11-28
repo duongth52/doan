@@ -197,19 +197,19 @@
                             </ul>
                         </li>
                         <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
-                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="{{route('danhSachCategori')}}">
                                 <i class="nav-main-link-icon si si-bulb"></i>
-                                <span class="nav-main-link-name">Bác sĩ</span>
+                                <span class="nav-main-link-name">Danh mục bài viết</span>
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('examples/plugin-helper') ? ' active' : '' }}" href="/examples/plugin-helper">
-                                        <span class="nav-main-link-name">Danh sách bác sĩ</span>
+                                    <a class="nav-main-link{{ request()->is('examples/plugin-helper') ? ' active' : '' }}" href="{{route('danhSachCategori')}}">
+                                        <span class="nav-main-link-name">Danh sách danh mục</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('examples/plugin-init') ? ' active' : '' }}" href="/examples/plugin-init">
-                                        <span class="nav-main-link-name">Thêm bác sĩ</span>
+                                    <a class="nav-main-link{{ request()->is('examples/plugin-init') ? ' active' : '' }}" href="{{route('showAddCategori')}}">
+                                        <span class="nav-main-link-name">Thêm danh mục</span>
                                     </a>
                                 </li>
                             </ul>
