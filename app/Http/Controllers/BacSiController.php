@@ -23,7 +23,6 @@ class BacSiController extends Controller
 
     public function postAdd(Request $request)
     {
-        // dd($request);
         $validatedData = $request->validate([
             'email' => 'required|email|unique:users,email|max:255',
             'name' => 'required',
@@ -59,7 +58,6 @@ class BacSiController extends Controller
                 }
             }
         }
-
         $dataCreate->name = $request->name;
         $dataCreate->phone = $request->phone;
         $dataCreate->email = $request->email;
@@ -74,11 +72,8 @@ class BacSiController extends Controller
 
     public function edit($id)
     {
-
         $khoa = Khoa::all();
-
         $find = User::findOrFail($id);
-
         return view('admin.bacsi.suanhanvien', compact('find', 'khoa'));
     }
 

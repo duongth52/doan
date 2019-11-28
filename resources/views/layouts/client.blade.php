@@ -34,11 +34,7 @@
 
 
     <!-- Scripts -->
-    <script>
-        window.Laravel = {
-            !!json_encode(['csrfToken' => csrf_token(), ]) !!
-        };
-    </script>
+    <script>window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};</script>
 </head>
 
 <body>
@@ -272,7 +268,6 @@
         <!-- END Main Container -->
     </div>
 
-    @yield('js_after')
 </body>
 <script src=" {{ asset('client/js/jquery-2.2.0.min.js') }}"></script>
 <script src="{{ asset('client/js/bootstrap.min.js') }} "></script>
@@ -297,5 +292,6 @@
 <script src="{{ asset('client/js/ie10-viewport-bug-workaround.js') }}"></script>
 <!-- <Custom javascript -->
 <script src="{{ asset('client/js/ie10-viewport-bug-workaround.js') }}"></script>
+@yield('js_after')
 
 </html>

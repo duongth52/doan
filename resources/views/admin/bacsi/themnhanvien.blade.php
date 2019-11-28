@@ -13,9 +13,7 @@
     </div>
     <div style="padding: 0px 6%; height:100% ">
         <div style="min-width:100%; margin-top: 20px">
-            <h1 class="block-title" style="text-align: center;">Nhập thông tin bác sĩ
-
-            </h1>
+            <h1 class="block-title" style="text-align: center;">Nhập thông tin bác sĩ</h1>
             <p style="margin: 0px auto; border: 1px solid blue; width: 8%;"></p>
         </div>
         <form method="post" action="{{route('add')}}" enctype="multipart/form-data">

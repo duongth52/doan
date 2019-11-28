@@ -4,7 +4,8 @@
 
 Route::get('/home', 'bookingController@home');
 Route::get('/dat-lich-kham','bookingController@booking')->name('datlich');
-Route::post('/dat-lich-kham', 'bookingController@saveBooking');
+// Route::post('/dat-lich-kham', 'bookingController@saveBooking');
+Route::get('/dat-lich-kham/doctor','bookingController@showDoctor' )->name('showDoctor');
 
 
 // admin
