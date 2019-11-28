@@ -11,7 +11,6 @@ class bookingController extends Controller
 {
     public function index() {
 
-        //return view('trangchu');
 
         $booking = Booking::leftJoin('users','users.id','=','booking.id_doctor')
                 ->leftJoin('khoa','khoa.id','=','booking.id_khoa')
