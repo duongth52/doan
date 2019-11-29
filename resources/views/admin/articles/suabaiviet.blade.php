@@ -17,22 +17,33 @@
             <h1 class="block-title" style="text-align: center;">Nhập thông tin bài viết</h1>
             <p style="margin: 0px auto; border: 1px solid blue; width: 8%;"></p>
         </div>
-        <form method="post" action="{{route('createCategori')}}" enctype="multipart/form-data">
+        <form method="post" action="{{route('updateArticle', $article->id)}}" enctype="multipart/form-data">
             @csrf
             <div class="row" style="min-width:100%; margin-top: 30px">
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Tên bài viết<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="name" placeholder="Nhập tên tên ">
+                        <input type="text" class="form-control" name="name" placeholder="Nhập tên tên " value="{!!$article->name!!}">
                     </div>
                     <div class="form-group">
                         <label>Mô tả ngắn <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="description" placeholder="Nhập mô tả ngắn ">
+                        <input type="text" class="form-control" name="subDescription" placeholder="Nhập mô tả ngắn" value="{!!$article->subDescription!!}">
+                    </div>
+                    <div class="form-group">
+                        <label for="example-select">Danh mục</label>
+                        <select class="form-control" id="example-select" name="categori">
+                            @foreach($categori as $data)
+                                <option value="{{$data->id}}" {{ $data->id == $article->categoryIds ? 'selected' : '' }}>{{$data->name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Ảnh bài viết <span class="text-danger">*</span></label>
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" data-toggle="custom-file-input" id="example-file-input-custom" name="image" accept=".png, .jpg, .jpeg">
+                            <div>
+                                {{$article->images}}
+                            </div>
+                            <input type="file" class="custom-file-input" data-toggle="custom-file-input" id="example-file-input-custom" name="image" accept=".png, .jpg, .jpeg" value="{!!$article->images!!}">
                             <label class="custom-file-label">Chọn ảnh</label>
                         </div>
                     </div>
@@ -42,7 +53,7 @@
                         <label>Nội dụng bài viết <span class="text-danger">*</span></label>
                         <div class="block-content block-content-full" style="padding: 0px">
                             <!-- Summernote Container -->
-                            <div class="js-summernote">Hello Summernote!</div>
+                            <textarea class="js-summernote" name="description" value="{!!$article->description!!}"></textarea>
                         </div>
                     </div>
                 </div>

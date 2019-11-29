@@ -48,8 +48,8 @@
                         <td class="font-size-sm">{{$data->categoriName}}</td>
                         <td class="font-size-sm">{{$data->created_at}}</td>
                         <td>
-                            <a class="btn btn-info" href="{{route('showUpdateCategori', $data->id)}}">Edit</a>
-                            <a href="{{route('delete', $data->id)}}">Delete</a>
+                            <a class="btn btn-info" href="{{route('showUpdateArticle', $data->id)}}">Sửa</a>
+                            <a href="{{route('deleteArticle', $data->id)}}">Xóa</a>
                         </td>
                     </tr>
                 @endforeach

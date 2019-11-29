@@ -50,7 +50,7 @@
                         <label>Nội dụng bài viết <span class="text-danger">*</span></label>
                         <div class="block-content block-content-full" style="padding: 0px">
                             <!-- Summernote Container -->
-                            <div class="js-summernote" id="description">
+                            <textarea class="js-summernote" name="description"></textarea>
                         </div>
                     </div>
                 </div>
@@ -69,12 +69,6 @@
 @endsection
 
 @section('js_after')
-
-    <script>
-
-var inputValue = $("#description").html;
-    </script>
-
     <script>jQuery(function(){ One.helpers(['summernote', 'ckeditor', 'simplemde']); });</script>
     <script src=" {{ asset('/js/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <script src=" {{ asset('/js/plugins/ckeditor/ckeditor.js') }}"></script>

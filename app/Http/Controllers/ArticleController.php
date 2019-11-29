@@ -24,14 +24,12 @@ class ArticleController extends Controller {
         return;
     }
 
-
     public function Create(Request $request)
     {
-        dd($request);
         $pathImg = '';
-
         $dataCreate = new Articles();
         $namefile = '';
+
         if ($request->hasFile('image')) {
 
             $file = $request->file('image');
@@ -50,9 +48,53 @@ class ArticleController extends Controller {
         $dataCreate->images = $pathImg;
         $dataCreate->categoryIds = $request->categori;
         $dataCreate->description = $request->description;
-        dd($dataCreate);
+
         if ($dataCreate->save()) {
+            return redirect()->route('danhSachArticle')->with('message', 'success');
+        }
+    }
+
+
+
+    public function showUpdate($id)
+    {
+        $article = Articles::findOrFail($id);
+        $categori = Categoris::all();
+        return view('admin.articles.suabaiviet', compact('article', 'categori'));
+    }
+
+    public function Update($id, Request $request)
+    {
+        $pathImg = '';
+        $dataUp = Categori::find($id);
+
+        if ($request->hasFile('image')) {
+
+            $file = $request->file('image');
+            // lay ten file
+            $namefile = $file->getClientOriginalName();
+
+            if ($file->getError() == 0) {
+                // upload
+                if ($file->move(public_path('uploads/categories/'), $namefile)) {
+                    $pathImg = "uploads/categories/" . $namefile;
+                }
+            }
+        }
+
+        $dataUp->name = $request->name;
+        $dataUp->description = $request->description;
+        $dataUp->images = $pathImg;
+
+        if ($dataUp->save()) {
             return redirect()->route('danhSachCategori')->with('message', 'success');
         }
     }
+
+    public function delete($id)
+    {
+        Categori::destroy($id);
+        return redirect('/danh-sach-danh-muc');
+    }
+
 }

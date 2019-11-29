@@ -13,10 +13,10 @@ Route::get('/dat-lich-kham/doctor','bookingController@showDoctor' )->name('showD
 //Route::view('/', 'dashboard');
 
 //booking
-Route::get('/danh-sach-booking', 'bookingController@index');
-Route::view('/them-booking', 'admin.booking.thembooking');
+Route::get('/danh-sach-booking', 'bookingController@index')->name('danhsachBooking');
+Route::view('/them-booking', 'admin.booking.thembooking')->name('themBooing');
 
-//bẹnh nhân
+//bênh nhân
 Route::view('/danh-sach-benh-nhan', 'admin.danhsachbenhnhan');
 Route::view('/them-benh-nhan', 'admin.thembenhnhan');
 
@@ -43,3 +43,4 @@ Route::post('/them-bai-viet', 'ArticleController@Create')->name('createArticle')
 Route::get('/description', 'ArticleController@description')->name('description');
 Route::get('/sua-bai-viet/{id}', 'ArticleController@showUpdate')->name('showUpdateArticle');
 Route::post('/sua-bai-viet/{id}', 'ArticleController@Update')->name('updateArticle');
+Route::get('/xoa-bai-viet/{id}', 'ArticleController@delete')->name('deleteArticle');

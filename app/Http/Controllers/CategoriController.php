@@ -82,7 +82,6 @@ class CategoriController extends Controller
         }
     }
 
-
     public function delete($id)
     {
         Categori::destroy($id);
