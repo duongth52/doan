@@ -20,7 +20,7 @@
                 </form>
             </div>
             <div class="col-6">
-                <a href="{{route('addnv')}}">
+                <a href="{{route('showAddCategori')}}">
                     <button class="btn btn-info" style="float:right"> Thêm danh mục</button>
                 </a>
             </div>
@@ -47,7 +47,7 @@
                         <td class="font-size-sm">{{$data->createdDate}}</td>
                         <td>
                             <a class="btn btn-info" href="{{route('showUpdateCategori', $data->id)}}">Edit</a>
-                            <a href="{{route('delete', $data->id)}}">Delete</a>
+                            <a href="{{route('deleteCategori', $data->id)}}">Delete</a>
                         </td>
                     </tr>
                 @endforeach

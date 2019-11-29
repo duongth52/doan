@@ -8,16 +8,19 @@ use App\Categoris as Categori;
 class CategoriController extends Controller
 {
 
-    public function index() {
+    public function index()
+    {
         $categori = Categori::all();
         return view('admin.categories.danhsachdanhmuc', compact('categori'));
     }
 
-    public function showAdd() {
+    public function showAdd()
+    {
         return view('admin.categories.themdanhmuc');
     }
 
-    public function Create(Request $request) {
+    public function Create(Request $request)
+    {
 
         $pathImg = '';
 
@@ -40,17 +43,19 @@ class CategoriController extends Controller
         $dataCreate->description = $request->description;
         $dataCreate->images = $pathImg;
 
-        if($dataCreate->save()){
+        if ($dataCreate->save()) {
             return redirect()->route('danhSachCategori')->with('message', 'success');
         }
     }
 
-    public function showUpdate($id) {
+    public function showUpdate($id)
+    {
         $categori = Categori::findOrFail($id);
         return view('admin.categories.suadanhmuc', compact('categori'));
     }
 
-    public function Update($id, Request $request ) {
+    public function Update($id, Request $request)
+    {
         $pathImg = '';
         $dataUp = Categori::find($id);
 
@@ -73,9 +78,14 @@ class CategoriController extends Controller
         $dataUp->images = $pathImg;
 
         if ($dataUp->save()) {
-            return redirect()->route('updateCategori')->with('message', 'success');
+            return redirect()->route('danhSachCategori')->with('message', 'success');
         }
-
     }
 
+
+    public function delete($id)
+    {
+        Categori::destroy($id);
+        return redirect('/danh-sach-danh-muc');
+    }
 }

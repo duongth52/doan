@@ -9,9 +9,9 @@ use App\Categoris;
 class ArticleController extends Controller {
 
     public function index() {
-        $articles = Articles::leftJoin('categories','categories.id','=','articles.categoryIds')
-                ->select( 'articles.*', 'categories.name as categoriName')
-                ->get();
+        $articles = Articles::leftJoin('categories', 'categories.id', '=', 'articles.categoryIds')
+            ->select('articles.*', 'categories.name as categoriName')
+            ->get();
         return view('admin.articles.danhsachbaiviet', compact('articles'));
     }
 
@@ -25,10 +25,9 @@ class ArticleController extends Controller {
     }
 
 
-    public function Create(Request $request) {
-
+    public function Create(Request $request)
+    {
         dd($request);
-
         $pathImg = '';
 
         $dataCreate = new Articles();
@@ -52,9 +51,8 @@ class ArticleController extends Controller {
         $dataCreate->categoryIds = $request->categori;
         $dataCreate->description = $request->description;
         dd($dataCreate);
-        if($dataCreate->save()){
+        if ($dataCreate->save()) {
             return redirect()->route('danhSachCategori')->with('message', 'success');
         }
     }
-
 }

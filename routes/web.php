@@ -20,7 +20,6 @@ Route::view('/them-booking', 'admin.booking.thembooking');
 Route::view('/danh-sach-benh-nhan', 'admin.danhsachbenhnhan');
 Route::view('/them-benh-nhan', 'admin.thembenhnhan');
 
-
 //bác sĩ
 Route::get('/danh-sach-nhan-vien', 'BacSiController@getALL')->name('danhsachnhanvien');
 Route::get('/them-nhan-vien', 'BacSiController@getAdd')->name('addnv');
@@ -35,6 +34,7 @@ Route::get('/them-danh-muc', 'CategoriController@showAdd')->name('showAddCategor
 Route::post('/them-danh-muc', 'CategoriController@Create')->name('createCategori');
 Route::get('/sua-danh-muc/{id}', 'CategoriController@showUpdate')->name('showUpdateCategori');
 Route::post('/sua-danh-muc/{id}', 'CategoriController@Update')->name('updateCategori');
+Route::get('/xoa-danh-muc/{id}', 'CategoriController@delete')->name('deleteCategori');
 
 // articles
 Route::get('/danh-sach-bai-viet', 'ArticleController@index')->name('danhSachArticle');
