@@ -156,7 +156,7 @@
         var time = $("#time_" + idTime);
 
         time.addClass("bg").siblings().removeClass("bg");
-        time.parent().siblings().children().removeClass("bg"); //.removeClass("bg").children()
+        time.parent().siblings().children().removeClass("bg");
         return id_Time = idTime;
     }
 

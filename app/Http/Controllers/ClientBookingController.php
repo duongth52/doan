@@ -160,7 +160,8 @@ class ClientBookingController extends Controller
             </tr>';
         }
 
-        $html = '<h2>Danh sách kết quả: </h2>
+        $html = '<div id="showResult">
+                    <h2>Danh sách kết quả: </h2>
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -173,7 +174,8 @@ class ClientBookingController extends Controller
                         <tbody>'.
                                 $tr
                         .'</tbody>
-                    </table>';
+                    </table>
+                </div>';
     }
     return response()->json(['data' => $html]);
   }

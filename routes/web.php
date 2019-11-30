@@ -86,6 +86,17 @@ Route::group([
     Route::post('/sua-ket-qua/{id}', 'ResultController@Update')->name('updateResult');
     Route::get('/xoa-ket-qua/{id}', 'ResultController@delete')->name('deleteResult');
 
+
+
+    //Time
+    //  Route::get('/danh-sach-ket-qua', 'ResultController@listResult')->name('danhSachResult');
+    //  Route::get('/them-ket-qua', 'ResultController@showAdd')->name('showAddResult');
+    //  Route::post('/them-ket-qua', 'ResultController@Create')->name('createResult');
+    //  Route::get('/sua-ket-qua/{id}', 'ResultController@showUpdate')->name('showUpdateResult');
+    //  Route::post('/sua-ket-qua/{id}', 'ResultController@Update')->name('updateResult');
+    //  Route::get('/xoa-ket-qua/{id}', 'ResultController@delete')->name('deleteResult');
+
+
 });
 
 // Auth::routes();

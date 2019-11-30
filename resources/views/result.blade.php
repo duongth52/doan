@@ -29,6 +29,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 <script>
   $("#btn-check").click(function() {
+
+    if($('#showResult')){
+        $('#showResult').remove()
+    }
+
     var id_patient = $("input[name=id_patient]").val();
 
     if (id_patient) {
@@ -45,7 +50,6 @@
         },
 
         success: function(data) {
-            console.log(data.data)
             $('#result').append(data.data);
 
         },

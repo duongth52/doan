@@ -71,11 +71,11 @@
                 <div class="col-md-4 offset-md-1">
                     <div class="form-group">
                         <label>Địa chỉ <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="address" placeholder="Nhập địa chỉ" value="{!!$patient->name!!}">
+                        <input type="text" class="form-control" name="address" placeholder="Nhập địa chỉ" value="{!!$patient->address!!}">
                     </div>
                     <div class="form-group">
                         <label>Mô tả</label>
-                        <textarea class="form-control" id="ghichu" name="description" rows="4" placeholder="Ghi chú ..." > {!!$patient->name!!}</textarea>
+                        <textarea class="form-control" id="ghichu" name="description" rows="4" placeholder="Ghi chú ..." > {!!$patient->description!!}</textarea>
                     </div>
                 </div>
                 <div class="col-md-9 offset-md-1">
