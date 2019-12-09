@@ -1,15 +1,16 @@
 <?php
-//clinet
+//client
+// bỏ thằng đấy đi ,k  dùng   ajax choox nao
 
+Route::get('/home', 'ClientHomeController@home')->name('home');
+Route::get('/dat-lich-kham','ClientBookingController@booking')->name('datlich');
+//Route::post('/dat-lich-kham', 'ClientBookingController@saveBooking')->name('saveBooking');
+Route::get('/dat-lich-kham/time/','ClientBookingController@showTime' )->name('showTime');
 
-Route::get('/home', 'bookingController@home');
-Route::get('/dat-lich-kham','bookingController@booking')->name('datlich');
-// Route::post('/dat-lich-kham', 'bookingController@saveBooking');
-Route::get('/dat-lich-kham/doctor','bookingController@showDoctor' )->name('showDoctor');
+Route::post('/ajaxRequest', 'ClientBookingController@test'); // ddaay laf urrl
 
 
 // admin
-
 //Route::view('/', 'dashboard');
 
 //booking

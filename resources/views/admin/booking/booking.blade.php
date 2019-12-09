@@ -57,7 +57,6 @@
             @foreach($booking as $data)
                 <tr>
                     <td class="text-center">{{$data->id}}</td>
-                    <!-- <td class="text-center">BN1243</td> -->
                     <td class="font-w600 font-size-sm">
                         <a href="be_pages_generic_profile.html">{{$data->name}}</a>
                     </td>
@@ -84,7 +83,6 @@
                     </td>
                 </tr>
             @endforeach
-
             </tbody>
         </table>
     </div>

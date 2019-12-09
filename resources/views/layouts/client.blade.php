@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>client</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('client/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('client/css/animate.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('client/css/bootstrap-submenu.css') }}">
@@ -20,6 +21,8 @@
     <!-- Custom stylesheet -->
     <link rel="stylesheet" type="text/css" href=" {{ asset('client/css/style.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('client/css/default.css') }}">
+    <!-- toast -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
 
     <!-- Favicon icon--->
     <!-- <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" > -->
@@ -51,13 +54,6 @@
         color: black !important;
     }
     </style>
-
-    <!-- Scripts -->
-    <script>
-    window.Laravel = {
-        !!json_encode(['csrfToken' => csrf_token(), ]) !!
-    };
-    </script>
 </head>
 
 <body>
