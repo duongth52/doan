@@ -98,9 +98,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 <script type="text/javascript">
     var length_time = 0;
+
     $("#bookingDate").change(function() {
         $("#timeBooking").empty();
         var date = $(this).val();
+        console.log(date)
         $.ajax({
             url: "{{ route('showTime') }}?date=" + date,
             method: 'GET',
@@ -110,6 +112,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data) {
+                console.log(data)
                 length_time = data.count;
                 $('#timeBooking').append(data.html);
             },
@@ -124,15 +127,16 @@
     $("#btn-submit").click(function() {
         var name = $("input[name=name]").val();
         var email = $("input[name=email]").val();
-        // var birthday = $("input[name=birthday]").val();
-        // var khoa = $("#khoa option:selected" ).val();
-        // var gender = $("input[name=gender]").val();
-         var phone = $("input[name=phone]").val();
-        // var bookingDate = $("input[name=bookingDate]").val();
-        // var note = $("#note").val();
+        var birthday = $("input[name=birthday]").val();
+        var khoa = $("#khoa option:selected" ).val();
+        var gender = $("input[name='gender']:checked").val();
+        var phone = $("input[name=phone]").val();
+        var bookingDate = $("input[name=bookingDate]").val();
+        var note = $("#note").val();
 
-// console.log(name, '-', email, '-', birthday, '-', khoa, '-', gender, '-', phone, '-', bookingDate, '-', note, '-',);
-        // the de im t sua cho lam cc gì the tắt bớt mấy cái k cần r
+
+        // console.log(name, '-', email, '-', birthday, '-', khoa, '-', gender, '-', phone, '-', bookingDate, '-', note, '-',);
+
         $.ajax({
             method: 'POST',
             url: '/ajaxRequest',
@@ -144,16 +148,18 @@
             data: {
                 name: name,
                 email: email,
-               // birthday: gender,
-               // khoa: gender,
-               // gender: gender,
+                birthday: birthday,
+                khoa: parseInt(khoa),
+                gender: gender,
                 phone: phone,
-                //bookingDate: bookingDate,
-               // note: note
+                bookingDate: bookingDate,
+                id_time: 1,
+                note: note
             },
 
             success: function(data) {
                 if(data.status === 200) {
+                    alert('oke');
                     //toast => thành công
                     location.reload(true);
                 }

@@ -40,6 +40,7 @@
             </thead>
             <tbody>
                 @foreach($obj as $data)
+
                     <tr>
                         <td class="text-center">{{$data->id}}</td>
                         <td class="font-w600 font-size-sm">
@@ -53,11 +54,21 @@
                         <!-- <td>
                             <span class="badge badge-success">Hoạt động</span>
                         </td> -->
+                        @if(Auth::user()->role === 'superadmin')
+                            <td>
+                                <a>Xem</a>
+                                <a class="btn btn-info" href="{{route('doctor', $data->id)}}">Edit</a>
+                                <a href="{{route('delete', $data->id)}}">Delete</a>
+                            </td>
+                        @elseif(Auth::user()->role === 'admin')
                         <td>
-                            <a class="btn btn-info" href="{{route('doctor', $data->id)}}">Edit</a>
-                            <a href="{{route('delete', $data->id)}}">Delete</a>
+                            <a>Xem</a>
+                            <a class="btn btn-info">Edit</a>
+                            <a>Delete</a>
                         </td>
+                        @endif
                     </tr>
+
                 @endforeach
             </tbody>
         </table>

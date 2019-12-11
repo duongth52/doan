@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Khoa;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class BacSiController extends Controller {
     public function getALL() {
-        $obj = User::all();
+        $obj = User::where('id','!=', Auth::user()->id)->get();
         return view('admin.bacsi.danhsachnhanvien', compact('obj'));
     }
 
@@ -87,6 +89,6 @@ class BacSiController extends Controller {
 
     public function delete($id) {
         User::destroy($id);
-        return redirect('/danh-sach-nhan-vien');
+        return redirect('admin/danh-sach-nhan-vien');
     }
 }

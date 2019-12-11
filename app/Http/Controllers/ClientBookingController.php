@@ -24,7 +24,6 @@ class ClientBookingController extends Controller {
 
         $booking = Booking::select('id_time')->where('book_date', $date)->get();
 
-
         $id_time = array();
         $count = array();
 
@@ -33,8 +32,6 @@ class ClientBookingController extends Controller {
          };
 
         $count = array_count_values($id_time);
-
-        // return  count($count);
 
         if (!$date) {
             $html = '<div class="col-md-12">Chọn sai ngày</div>';
@@ -69,18 +66,19 @@ class ClientBookingController extends Controller {
 
     ///// check
     public function test(Request $request) {
-        // return $request->name;
-        // dd($request);
+
+
         $booking = new Booking();
-        // dc r nhe
+
         $booking->name = $request->name;
         $booking->email = $request->email;
-        // $booking->birthday = $request->birthday;
-        // $booking->gender = $request->gender;
-        // $booking->khoa = $request->khoa;
+        $booking->birthday = $request->birthday;
+        $booking->gender = $request->gender;
+        $booking->id_khoa = $request->khoa;
         $booking->phone = $request->phone;
-        // $booking->bookingDate = $request->boMAokingDate;
-        // $booking->note = $request->note;
+        $booking->book_date = $request->bookingDate;
+        $booking->id_time = $request->id_time;
+        $booking->note = $request->note;
 
         $booking->save();
         return response()->json(['status' => 200, 'data' =>  $booking]);
