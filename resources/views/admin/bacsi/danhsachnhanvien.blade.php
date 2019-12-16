@@ -10,7 +10,8 @@
             <div class="col-6">
                 <form class="d-none d-sm-inline-block" action="/dashboard" method="POST">
                     <div class="input-group input-group-sm">
-                        <input type="text" class="form-control form-control-alt" placeholder="Tìm kiếm theo tên " id="page-header-search-input2" name="page-header-search-input2">
+                        <input type="text" class="form-control form-control-alt" placeholder="Tìm kiếm theo tên "
+                            id="page-header-search-input2" name="page-header-search-input2">
                         <div class="input-group-append">
                             <span class="input-group-text bg-body border-0">
                                 <i class="si si-magnifier"></i>
@@ -41,33 +42,57 @@
             <tbody>
                 @foreach($obj as $data)
 
-                    <tr>
-                        <td class="text-center">{{$data->id}}</td>
-                        <td class="font-w600 font-size-sm">
-                            <a href="be_pages_generic_profile.html">{{$data->name}}</a>
-                        </td>
-                        <td class="font-size-sm">{{$data->email}}</td>
-                        <td class="font-size-sm">{{$data->sdt}}</td>
-                        <td>
-                            {{ $data->gioitinh ? "Nữ" : "Nam" }}
-                        </td>
-                        <!-- <td>
+                <tr>
+                    <td class="text-center">{{$data->id}}</td>
+                    <td class="font-w600 font-size-sm">
+                        <a href="be_pages_generic_profile.html">{{$data->name}}</a>
+                    </td>
+                    <td class="font-size-sm">{{$data->email}}</td>
+                    <td class="font-size-sm">{{$data->sdt}}</td>
+                    <td>
+                        {{ $data->gioitinh ? "Nữ" : "Nam" }}
+                    </td>
+                    <!-- <td>
                             <span class="badge badge-success">Hoạt động</span>
                         </td> -->
-                        @if(Auth::user()->role === 'superadmin')
-                            <td>
-                                <a>Xem</a>
-                                <a class="btn btn-info" href="{{route('doctor', $data->id)}}">Edit</a>
-                                <a href="{{route('delete', $data->id)}}">Delete</a>
-                            </td>
-                        @elseif(Auth::user()->role === 'admin')
-                        <td>
-                            <a>Xem</a>
-                            <a class="btn btn-info">Edit</a>
-                            <a>Delete</a>
-                        </td>
-                        @endif
-                    </tr>
+                    @if(Auth::user()->role === 'superadmin')
+
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <a href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button"
+                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="xem chi tiết">
+                                <i class=" far fa-eye"></i>
+                            </a>
+                            <a href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button"
+                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="sửa">
+                                <i class="fa fa-fw fa-pencil-alt"></i>
+                            </a>
+                            <a href="{{route('delete', $data->id)}}" type="button" class="btn btn-sm btn-danger"
+                                data-toggle="tooltip" title="xóa">
+                                <i class="fa fa-fw fa-times"></i>
+                            </a>
+                        </div>
+                    </td>
+                    @elseif(Auth::user()->role === 'admin')
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <button href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button"
+                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="xem chi tiết">
+                                <i class=" far fa-eye"></i>
+                            </button>
+                            <button href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button"
+                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="sửa">
+                                <i class="fa fa-fw fa-pencil-alt"></i>
+                            </button>
+                            <button href="{{route('delete', $data->id)}}" type="button" class="btn btn-sm btn-danger"
+                                data-toggle="tooltip" title="xóa">
+                                <i class="fa fa-fw fa-times"></i>
+                            </button>
+                        </div>
+                    </td>
+                    @endif
+
+                </tr>
 
                 @endforeach
             </tbody>

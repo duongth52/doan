@@ -2,25 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Articles;
 use App\Categoris;
+use Illuminate\Http\Request;
 
-class ArticleController extends Controller {
+class ArticleController extends Controller
+{
 
-    public function index() {
+    public function index()
+    {
         $articles = Articles::leftJoin('categories', 'categories.id', '=', 'articles.categoryIds')
             ->select('articles.*', 'categories.name as categoriName')
             ->get();
         return view('admin.articles.danhsachbaiviet', compact('articles'));
     }
 
-    public function showAdd() {
+    public function showAdd()
+    {
         $categori = Categoris::all();
         return view('admin.articles.thembaiviet', compact('categori'));
     }
 
-    public function description() {
+    public function description()
+    {
         return;
     }
 
@@ -54,8 +58,6 @@ class ArticleController extends Controller {
         }
     }
 
-
-
     public function showUpdate($id)
     {
         $article = Articles::findOrFail($id);
@@ -66,7 +68,7 @@ class ArticleController extends Controller {
     public function Update($id, Request $request)
     {
         $pathImg = '';
-        $dataUp = Categori::find($id);
+        $dataUp = Articles::find($id);
 
         if ($request->hasFile('image')) {
 
@@ -84,11 +86,13 @@ class ArticleController extends Controller {
 
         $dataUp->name = $request->name;
         $dataUp->description = $request->description;
+        $dataUp->subDescription = $request->subDescription;
+        $dataUp->categoryIds = $request->input('categori');
         $dataUp->images = $pathImg;
+        $dataUp->save();
 
-        if ($dataUp->save()) {
-            return redirect()->route('danhSachCategori')->with('message', 'success');
-        }
+        return redirect()->route('danhSachCategori')->with('message', 'success');
+
     }
 
     public function delete($id)

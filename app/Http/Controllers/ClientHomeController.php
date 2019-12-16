@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Articles;
 
 class ClientHomeController extends Controller
 {
     //
-    public function home() {
+    public function home()
+    {
 
-        // $user = User::where('id_khoa', '1')->get();
-        // dd($user);
-        return view('trangchu');
+        $article = Articles::select('*')->Where('categoryIds', 5)->take(3)->get();
+        $news = Articles::select('*')->Where('categoryIds', 6)->take(6)->get();
+        $doctors = Articles::select('*')->Where('categoryIds', 7)->take(6)->get();
+        // dd($article);
+        return view('trangchu', compact('article', 'news', 'doctors'));
     }
 }
