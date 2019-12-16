@@ -18,16 +18,13 @@ Route::view('/loginclient', 'client_login');
 //user: admin -> them sua xoa bac si
 //  user -> danh sach booking
 
-
-
-
 //bác sĩ
 Route::group([
     'prefix' => 'admin',
     'middleware'=>['web','checkAdmin'],
 ], function(){
     // admin
-    //Route::view('/', 'dashboard');
+    Route::view('/', 'dashboard');
 
     //booking
     Route::get('/danh-sach-booking', 'bookingController@index')->name('danhsachBooking');
@@ -60,6 +57,14 @@ Route::group([
     Route::get('/sua-bai-viet/{id}', 'ArticleController@showUpdate')->name('showUpdateArticle');
     Route::post('/sua-bai-viet/{id}', 'ArticleController@Update')->name('updateArticle');
     Route::get('/xoa-bai-viet/{id}', 'ArticleController@delete')->name('deleteArticle');
+
+    //result
+    Route::get('/danh-sach-ket-qua', 'ResultController@listResult')->name('danhSachResult');
+    Route::get('/them-ket-qua', 'ResultController@showAdd')->name('showAddResult');
+    Route::post('/them-ket-qua', 'ResultController@Create')->name('createResult');
+    Route::get('/sua-ket-qua/{id}', 'ResultController@showUpdate')->name('showUpdateResult');
+    Route::post('/sua-ket-qua/{id}', 'ResultController@Update')->name('updateResult');
+    Route::get('/xoa-ket-qua/{id}', 'ResultController@delete')->name('deleteResult');
 });
 
 

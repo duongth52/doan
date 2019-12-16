@@ -2,6 +2,13 @@
 
 @section('content')
 
+<style>
+    .bg {
+        background: #95c41f;
+        color: #37404d;
+    }
+</style>
+
 <div class="container" style="padding: 30px 0px">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -92,12 +99,39 @@
     </div>
 </div>
 
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 @endsection
 
 @section('js_after')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 <script type="text/javascript">
+
+//pusher
+
+
+
+
     var length_time = 0;
+    var id = 0;
 
     $("#bookingDate").change(function() {
         $("#timeBooking").empty();
@@ -112,7 +146,7 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data) {
-                console.log(data)
+                console.log(data.time)
                 length_time = data.count;
                 $('#timeBooking').append(data.html);
             },
@@ -122,6 +156,11 @@
         });
     });
 
+    function getIdTime( idTime ) {
+        var time = $("#time_"+idTime);
+        time.addClass("bg").siblings().removeClass("bg");
+        return id_Time = idTime;
+    }
 
 
     $("#btn-submit").click(function() {
@@ -133,42 +172,62 @@
         var phone = $("input[name=phone]").val();
         var bookingDate = $("input[name=bookingDate]").val();
         var note = $("#note").val();
+        // $("#myModal").modal();
+        if( name  && email && birthday && khoa && gender  && phone && bookingDate && note && id_Time) {
+            $.ajax({
+                method: 'POST',
+                url: '/ajaxRequest',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                dataType:'json',
 
+                data: {
+                    name: name,
+                    email: email,
+                    birthday: birthday,
+                    khoa: parseInt(khoa),
+                    gender: gender,
+                    phone: phone,
+                    bookingDate: bookingDate,
+                    id_time: id_Time,
+                    note: note
+                },
 
-        // console.log(name, '-', email, '-', birthday, '-', khoa, '-', gender, '-', phone, '-', bookingDate, '-', note, '-',);
+                success: function(data) {
+                    if(data.status === 200) {
 
-        $.ajax({
-            method: 'POST',
-            url: '/ajaxRequest',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            dataType:'json',
+                        toastr.success('Bạn đã đặt lich thành công!');
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": false,
+                            "progressBar": false,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut"
+                        }
 
-            data: {
-                name: name,
-                email: email,
-                birthday: birthday,
-                khoa: parseInt(khoa),
-                gender: gender,
-                phone: phone,
-                bookingDate: bookingDate,
-                id_time: 1,
-                note: note
-            },
+                     setInterval(function(){ location.reload(true); }, 5000);
 
-            success: function(data) {
-                if(data.status === 200) {
-                    alert('oke');
-                    //toast => thành công
-                    location.reload(true);
-                }
+                    }
+                },
+                error: function(err) {
+                    console.log(err);
+                },
+            });
+        } else {
+            alert('dđ')
+        }
 
-            },
-            error: function(err) {
-                console.log(err);
-            },
-        });
     });
 </script>
 @stop

@@ -66,7 +66,7 @@ class ArticleController extends Controller {
     public function Update($id, Request $request)
     {
         $pathImg = '';
-        $dataUp = Categori::find($id);
+        $dataUp = Categoris::find($id);
 
         if ($request->hasFile('image')) {
 
@@ -93,7 +93,7 @@ class ArticleController extends Controller {
 
     public function delete($id)
     {
-        Categori::destroy($id);
+        Categoris::destroy($id);
         return redirect('/danh-sach-danh-muc');
     }
 
