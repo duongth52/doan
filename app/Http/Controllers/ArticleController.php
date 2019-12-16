@@ -97,7 +97,7 @@ class ArticleController extends Controller
 
     public function delete($id)
     {
-        Categori::destroy($id);
+        Categoris::destroy($id);
         return redirect('/danh-sach-danh-muc');
     }
 

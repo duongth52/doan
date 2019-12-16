@@ -249,6 +249,10 @@
 <script src="{{ asset('client/js/ie10-viewport-bug-workaround.js') }}"></script>
 <!-- <Custom javascript -->
 <script src="{{ asset('client/js/ie10-viewport-bug-workaround.js') }}"></script>
+<!-- toasr -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
+
+
 @yield('js_after')
 
 </html>
