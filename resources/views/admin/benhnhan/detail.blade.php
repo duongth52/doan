@@ -48,7 +48,7 @@
                 </div>
                 <div class="timeline-event-block block invisible" data-toggle="appear">
                     <div class="block-header">
-                        <h3 class="block-title">Kết quả khám</h3>
+                        <h3 class="block-title">Kết quả khám: </h3>
                     </div>
                     <div class="block-content block-content-full">
                         <table class="table table-bordered table-striped table-vcenter js-dataTable-simple">

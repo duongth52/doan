@@ -131,7 +131,7 @@
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('examples/plugin-helper') ? ' active' : '' }}" href="/examples/plugin-helper">
+                                    <a class="nav-main-link{{ request()->is('examples/plugin-helper') ? ' active' : '' }}" href="{{route('danhsachBooking')}}">
                                         <span class="nav-main-link-name">Danh sách Booking</span>
                                     </a>
                                 </li>
