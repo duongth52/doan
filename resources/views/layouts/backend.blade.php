@@ -161,18 +161,18 @@
                             </ul>
                         </li>
                         <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
-                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
+                            <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" >
                                 <i class="nav-main-link-icon si si-bulb"></i>
                                 <span class="nav-main-link-name">Bệnh nhân</span>
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('examples/plugin-helper') ? ' active' : '' }}" href="/examples/plugin-helper">
+                                    <a class="nav-main-link{{ request()->is('examples/plugin-helper') ? ' active' : '' }}" href="{{route('danhsachbenhnhan')}}">
                                         <span class="nav-main-link-name">Danh sách bệnh nhân</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('examples/plugin-init') ? ' active' : '' }}" href="/examples/plugin-init">
+                                    <a class="nav-main-link{{ request()->is('examples/plugin-init') ? ' active' : '' }}" href=" {{route('thembenhnhan')}}">
                                         <span class="nav-main-link-name">Thêm bệnh nhân</span>
                                     </a>
                                 </li>

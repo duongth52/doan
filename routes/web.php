@@ -31,9 +31,14 @@ Route::group([
     Route::view('/them-booking', 'admin.booking.thembooking')->name('themBooing');
 
     //bênh nhân
-    Route::view('/danh-sach-benh-nhan', 'admin.danhsachbenhnhan');
-    Route::view('/them-benh-nhan', 'admin.thembenhnhan');
+    Route::get('/danh-sach-benh-nhan', 'PatientController@index')->name('danhsachbenhnhan');
+    Route::get('/them-benh-nhan', 'PatientController@thembenhnhan')->name('thembenhnhan');
+    Route::post('/them-benh-nhan', 'PatientController@create')->name('createpatient');
+    Route::get('/sua-benh-nhan/{id}', 'PatientController@edit')->name('suabenhnhan');
+    Route::post('/sua-benh-nhan/{id}', 'PatientController@update')->name('updatePatient');
+    Route::get('/xoa-benh-nhan/{id}', 'PatientController@delete')->name('deletePatient');
 
+    //doctor
     Route::get('/danh-sach-nhan-vien', 'BacSiController@getALL')->name('danhsachnhanvien');
     Route::get('/them-nhan-vien', 'BacSiController@getAdd')->name('addnv');
     Route::post('/them-nhan-vien', 'BacSiController@postAdd')->name('add');

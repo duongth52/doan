@@ -56,7 +56,6 @@
                             <span class="badge badge-success">Hoạt động</span>
                         </td> -->
                     @if(Auth::user()->role === 'superadmin')
-
                     <td class="text-center">
                         <div class="btn-group">
                             <a href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button"
@@ -76,18 +75,18 @@
                     @elseif(Auth::user()->role === 'admin')
                     <td class="text-center">
                         <div class="btn-group">
-                            <button href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button"
+                            <a href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button"
                                 class="btn btn-sm btn-primary" data-toggle="tooltip" title="xem chi tiết">
                                 <i class=" far fa-eye"></i>
-                            </button>
-                            <button href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button"
+                            </a>
+                            <a style="margin-right: 5px" type="button"
                                 class="btn btn-sm btn-primary" data-toggle="tooltip" title="sửa">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
-                            </button>
-                            <button href="{{route('delete', $data->id)}}" type="button" class="btn btn-sm btn-danger"
+                            </a>
+                            <a  type="button" class="btn btn-sm btn-danger"
                                 data-toggle="tooltip" title="xóa">
                                 <i class="fa fa-fw fa-times"></i>
-                            </button>
+                            </a>
                         </div>
                     </td>
                     @endif

@@ -21,7 +21,7 @@
                 <div class="col-md-4 offset-md-1">
                     <div class="form-group">
                         <label>Họ và tên (có dấu) <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="name" placeholder="Nhập tên bệnh nhân" value="{!!$find->name!!}">
+                        <input type="text" class="form-control" name="name" placeholder="Nhập tên nhân vien" value="{!!$find->name!!}">
                     </div>
                     <div class="form-group">
                         <label>Số điện thoại <span class="text-danger">*</span></label>
