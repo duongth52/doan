@@ -37,6 +37,9 @@ Route::group([
     Route::get('/sua-benh-nhan/{id}', 'PatientController@edit')->name('suabenhnhan');
     Route::post('/sua-benh-nhan/{id}', 'PatientController@update')->name('updatePatient');
     Route::get('/xoa-benh-nhan/{id}', 'PatientController@delete')->name('deletePatient');
+    Route::get('/chi-tiet-benh-nhan/{id}', 'PatientController@detail')->name('detailPatient');
+
+
 
     //doctor
     Route::get('/danh-sach-nhan-vien', 'BacSiController@getALL')->name('danhsachnhanvien');

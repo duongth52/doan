@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Patient;
+use App\Result;
 
 class PatientController extends Controller
 {
@@ -73,5 +74,10 @@ class PatientController extends Controller
     public function delete($id) {
         Patient::destroy($id);
         return redirect('admin/danh-sach-benh-nhan');
+    }
+    public function detail($id) {
+        $patient = Patient::findOrFail($id);
+        $result = Result::where('id_patient', $id)->get();
+        return view('admin.benhnhan.detail', compact('patient','result'));
     }
 }

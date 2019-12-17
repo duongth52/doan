@@ -56,16 +56,20 @@
                     @if(Auth::user()->role === 'superadmin' || Auth::user()->role === 'admin')
                     <td class="text-center">
                         <div class="btn-group">
-                            <a href="{{route('suabenhnhan', $data->id)}}" style="margin-right: 5px" type="button"
-                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="xem chi tiết">
+                            <a href="{{route('detailPatient', $data->id)}}" style="margin-right: 5px" type="button"
+                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="Xem chi tiết">
                                 <i class=" far fa-eye"></i>
                             </a>
                             <a href="{{route('suabenhnhan', $data->id)}}" style="margin-right: 5px" type="button"
-                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="sửa">
+                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="Thêm kết quả">
+                                <i class=" far fa-hdd"></i>
+                            </a>
+                            <a href="{{route('suabenhnhan', $data->id)}}" style="margin-right: 5px" type="button"
+                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="Sửa">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </a>
                             <a href="{{route('deletePatient', $data->id)}}" type="button" class="btn btn-sm btn-danger"
-                                data-toggle="tooltip" title="xóa">
+                                data-toggle="tooltip" title="Xóa">
                                 <i class="fa fa-fw fa-times"></i>
                             </a>
                         </div>
