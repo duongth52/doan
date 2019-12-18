@@ -1,5 +1,6 @@
 @extends('layouts.client')
 
+
 @section('content')
 
 <style>
@@ -7,6 +8,103 @@
         background: #95c41f;
         color: #37404d;
     }
+
+
+    .modal {
+    position: absolute;
+    z-index: 10000; /* 1 */
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+}
+
+.modal.is-visible {
+    visibility: visible;
+}
+
+.modal-overlay {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: hsla(0, 0%, 0%, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.3s, opacity 0.3s;
+}
+
+.modal.is-visible .modal-overlay {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.modal-wrapper {
+  position: absolute;
+  z-index: 9999;
+  top: 6em;
+  left: 50%;
+  width: 32em;
+  margin-left: -16em;
+  background-color: #fff;
+  box-shadow: 0 0 1.5em hsla(0, 0%, 0%, 0.35);
+}
+
+.modal-transition {
+  transition: all 0.3s 0.12s;
+  transform: translateY(-10%);
+  opacity: 0;
+}
+
+.modal.is-visible .modal-transition {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.modal-header,
+.modal-content {
+  padding: 1em;
+}
+
+.modal-header {
+  position: relative;
+  background-color: #fff;
+  box-shadow: 0 1px 2px hsla(0, 0%, 0%, 0.06);
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  color: #aaa;
+  background: none;
+  border: 0;
+}
+
+.modal-close:hover {
+  color: #777;
+}
+
+.modal-heading {
+  font-size: 1.125em;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.modal-content > *:first-child {
+  margin-top: 0;
+}
+
+.modal-content > *:last-child {
+  margin-bottom: 0;
+}
 </style>
 
 <div class="container" style="padding: 30px 0px">
@@ -100,22 +198,20 @@
 </div>
 
 
-
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
-        </div>
-        <div class="modal-body">
-          <p>Some text in the modal.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
+<div class="modal">
+    <div class="modal-overlay modal-toggle"></div>
+    <div class="modal-wrapper modal-transition">
+      <div class="modal-header">
+        <button class="modal-close modal-toggle"><svg class="icon-close icon" viewBox="0 0 32 32"><use xlink:href="#icon-close"></use></svg></button>
+        <h2 class="modal-heading">This is a modal</h2>
       </div>
 
+      <div class="modal-body">
+        <div class="modal-content">
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit eum delectus, libero, accusantium dolores inventore obcaecati placeat cum sapiente vel laboriosam similique totam id ducimus aperiam, ratione fuga blanditiis maiores.</p>
+          <button class="modal-toggle">Update</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -125,18 +221,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
 <script type="text/javascript">
 
-//pusher
-
-
-
-
     var length_time = 0;
     var id = 0;
 
     $("#bookingDate").change(function() {
         $("#timeBooking").empty();
         var date = $(this).val();
-        console.log(date)
         $.ajax({
             url: "{{ route('showTime') }}?date=" + date,
             method: 'GET',
@@ -159,9 +249,9 @@
     function getIdTime( idTime ) {
         var time = $("#time_"+idTime);
         time.addClass("bg").siblings().removeClass("bg");
+        time.parent().siblings().children().removeClass("bg");//.removeClass("bg").children()
         return id_Time = idTime;
     }
-
 
     $("#btn-submit").click(function() {
         var name = $("input[name=name]").val();
@@ -172,7 +262,11 @@
         var phone = $("input[name=phone]").val();
         var bookingDate = $("input[name=bookingDate]").val();
         var note = $("#note").val();
+
+
         // $("#myModal").modal();
+
+
         if( name  && email && birthday && khoa && gender  && phone && bookingDate && note && id_Time) {
             $.ajax({
                 method: 'POST',
@@ -215,6 +309,7 @@
                             "showMethod": "fadeIn",
                             "hideMethod": "fadeOut"
                         }
+                        $('.modal').toggleClass('is-visible');
 
                      setInterval(function(){ location.reload(true); }, 5000);
 

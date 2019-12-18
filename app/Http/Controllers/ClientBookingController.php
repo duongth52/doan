@@ -52,8 +52,8 @@ class ClientBookingController extends Controller {
                     }
 
                     $html .= '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" class="itemTimeSlot" onClick="getIdTime('.$time->id.')">
-                                <div class="agent-1">
-                                    <div class="agent-content" id=time_'.$time->id.'>
+                                <div class="agent-1"  id=time_'.$time->id.'>
+                                    <div class="agent-content">
                                         <h5 style="margin-bottom: 10px; font-weight: bold; ">'.$time->time.'</h5>
                                         <hr style="margin: 0px" />
                                         <p style="font-weight: bold; "> còn '. ( $time->total - $count_slot ) .'</p>

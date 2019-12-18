@@ -73,6 +73,9 @@ Route::group([
     Route::get('/sua-ket-qua/{id}', 'ResultController@showUpdate')->name('showUpdateResult');
     Route::post('/sua-ket-qua/{id}', 'ResultController@Update')->name('updateResult');
     Route::get('/xoa-ket-qua/{id}', 'ResultController@delete')->name('deleteResult');
+
+    //sendmail
+    Route::get('/create-mail', 'SendMessageController@createForm')->name('createForm');
 });
 
 
