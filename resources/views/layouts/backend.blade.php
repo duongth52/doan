@@ -185,12 +185,12 @@
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('examples/plugin-helper') ? ' active' : '' }}" href="{{route('danhsachbenhnhan')}}">
+                                    <a class="nav-main-link{{ request()->is('examples/plugin-helper') ? ' active' : '' }}" href="{{route('danhSachResult')}}">
                                         <span class="nav-main-link-name">Danh sách kết quả</span>
                                     </a>
                                 </li>
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('examples/plugin-init') ? ' active' : '' }}" href=" {{route('thembenhnhan')}}">
+                                    <a class="nav-main-link{{ request()->is('examples/plugin-init') ? ' active' : '' }}" href="{{route('showAddResult')}}">
                                         <span class="nav-main-link-name">Thêm kết quả</span>
                                     </a>
                                 </li>

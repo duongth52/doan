@@ -80,4 +80,10 @@ class PatientController extends Controller
         $result = Result::where('id_patient', $id)->get();
         return view('admin.benhnhan.detail', compact('patient','result'));
     }
+
+    public function showAddResult($id) {
+        $patient = Patient::findOrFail($id);
+        return view('admin.result.addresult', compact('patient'));
+
+    }
 }

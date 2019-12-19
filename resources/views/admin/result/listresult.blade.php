@@ -20,8 +20,8 @@
                 </form>
             </div>
             <div class="col-6">
-                <a href="{{route('showAddArticle')}}">
-                    <button class="btn btn-info" style="float:right"> Thêm bài viết</button>
+                <a href="{{route('showAddResult')}}">
+                    <button class="btn btn-info" style="float:right"> Thêm kết quả</button>
                 </a>
             </div>
 
@@ -32,7 +32,7 @@
                     <th class="text-center" style="width: 80px;">ID</th>
                     <th>Tên bệnh nhân</th>
                     <th>Tên bác sĩ</th>
-                    <th>Nội dung kết quả</th>
+                    <th>Mô tả kết quả</th>
                     <th>Đơn thuốc</th>
                     <th style="width: 15%;">Ngày tạo</th>
                     <th class="text-center" style="width: 15%;">Hành động</th>
@@ -40,19 +40,20 @@
             </thead>
             <tbody>
                 @foreach($result as $data)
-                    <!-- <tr>
+                    <tr>
                         <td class="text-center">{{$data->id}}</td>
                         <td class="font-w600 font-size-sm">
-                            <a href="be_pages_generic_profile.html">{{$data->name}}</a>
+                            <a href="be_pages_generic_profile.html">{{$data->patientName}}</a>
                         </td>
-                        <td class="font-size-sm">{{$data->subDescription}}</td>
-                        <td class="font-size-sm">{{$data->categoriName}}</td>
+                        <td class="font-size-sm">{{$data->doctorName}}</td>
+                        <td class="font-size-sm">{{$data->description}}</td>
+                        <td class="font-size-sm">{{$data->created_at}}</td>
                         <td class="font-size-sm">{{$data->created_at}}</td>
                         <td>
-                            <a class="btn btn-info" href="{{route('showUpdateArticle', $data->id)}}">Sửa</a>
-                            <a href="{{route('deleteArticle', $data->id)}}">Xóa</a>
+                            <a class="btn btn-info" href="{{route('showUpdateResult', $data->id)}}">Sửa</a>
+                            <a href="{{route('deleteResult', $data->id)}}">Xóa</a>
                         </td>
-                    </tr> -->
+                    </tr>
                 @endforeach
             </tbody>
         </table>

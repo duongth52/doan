@@ -60,7 +60,7 @@
                                 class="btn btn-sm btn-primary" data-toggle="tooltip" title="Xem chi tiết">
                                 <i class=" far fa-eye"></i>
                             </a>
-                            <a href="{{route('suabenhnhan', $data->id)}}" style="margin-right: 5px" type="button"
+                            <a href="{{route('showAddResultPateint', $data->id)}}" style="margin-right: 5px" type="button"
                                 class="btn btn-sm btn-primary" data-toggle="tooltip" title="Thêm kết quả">
                                 <i class=" far fa-hdd"></i>
                             </a>

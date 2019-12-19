@@ -30,6 +30,6 @@ class sendMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.orders.sendMail')->subject('ok men');
+        return $this->markdown('emails.orders.sendMail')->subject('Phòng khám nhi');
     }
 }
