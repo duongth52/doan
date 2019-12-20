@@ -61,6 +61,7 @@ class ArticleController extends Controller
     public function showUpdate($id)
     {
         $article = Articles::findOrFail($id);
+        // dd($article);
         $categori = Categoris::all();
         return view('admin.articles.suabaiviet', compact('article', 'categori'));
     }
@@ -71,17 +72,16 @@ class ArticleController extends Controller
         $dataUp = Articles::find($id);
 
         if ($request->hasFile('image')) {
-
             $file = $request->file('image');
             // lay ten file
             $namefile = $file->getClientOriginalName();
 
-            if ($file->getError() == 0) {
-                // upload
-                if ($file->move(public_path('uploads/categories/'), $namefile)) {
-                    $pathImg = "uploads/categories/" . $namefile;
-                }
-            }
+            // upload
+            $file->move(public_path('uploads/categories/'), $namefile);
+            $pathImg = "uploads/categories/" . $namefile;
+
+        } else {
+            $pathImg = $dataUp->images;
         }
 
         $dataUp->name = $request->name;

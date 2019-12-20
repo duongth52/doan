@@ -11,7 +11,8 @@
             <div class="col-6">
                 <form class="d-none d-sm-inline-block" action="/dashboard" method="POST">
                     <div class="input-group input-group-sm">
-                        <input type="text" class="form-control form-control-alt" placeholder="Tìm kiếm theo tên " id="page-header-search-input2" name="page-header-search-input2">
+                        <input type="text" class="form-control form-control-alt" placeholder="Tìm kiếm theo tên "
+                            id="myInput" name="page-header-search-input2">
                         <div class="input-group-append">
                             <span class="input-group-text bg-body border-0">
                                 <i class="si si-magnifier"></i>
@@ -37,11 +38,11 @@
                     <th class="text-center" style="width: 10%;">ngày sinh</th>
                     <th class="text-center">Địa chỉ</th>
                     <th class="text-center">Mô tả</th>
-                    <th class="text-center" >Hành động</th>
+                    <th class="text-center">Hành động</th>
                 </tr>
             </thead>
-            <tbody>
-            @foreach($patient as $data)
+            <tbody id="myTable">
+                @foreach($patient as $data)
                 <tr>
                     <td class="text-center">{{$data->id}}</td>
                     <td class="font-w600 font-size-sm">
@@ -60,8 +61,8 @@
                                 class="btn btn-sm btn-primary" data-toggle="tooltip" title="Xem chi tiết">
                                 <i class=" far fa-eye"></i>
                             </a>
-                            <a href="{{route('showAddResultPateint', $data->id)}}" style="margin-right: 5px" type="button"
-                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="Thêm kết quả">
+                            <a href="{{route('showAddResultPateint', $data->id)}}" style="margin-right: 5px"
+                                type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Thêm kết quả">
                                 <i class=" far fa-hdd"></i>
                             </a>
                             <a href="{{route('suabenhnhan', $data->id)}}" style="margin-right: 5px" type="button"
@@ -94,4 +95,16 @@
 <!-- <script src=" {{ asset('/js/plugins/datatables/buttons/dataTables.buttons.min.js') }}"></script> -->
 <!-- page -->
 <script src=" {{ asset('/js/pages/be_tables_datatables.min.js') }}"></script>
+
+
+<script>
+$(document).ready(function() {
+    $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+</script>
 @stop

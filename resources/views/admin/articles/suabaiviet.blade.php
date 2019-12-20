@@ -1,8 +1,8 @@
 @extends('layouts.backend')
 
 @section('css_after')
-        <link rel="stylesheet" href="{{asset('/js/plugins/summernote/summernote-bs4.css') }}">
-        <link rel="stylesheet" href="{{asset('/js/plugins/simplemde/simplemde.min.css') }}">
+<link rel="stylesheet" href="{{asset('/js/plugins/summernote/summernote-bs4.css') }}">
+<link rel="stylesheet" href="{{asset('/js/plugins/simplemde/simplemde.min.css') }}">
 @stop
 
 @section('content')
@@ -23,17 +23,20 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>Tên bài viết<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="name" placeholder="Nhập tên tên " value="{!!$article->name!!}">
+                        <input type="text" class="form-control" name="name" placeholder="Nhập tên tên "
+                            value="{!!$article->name!!}">
                     </div>
                     <div class="form-group">
                         <label>Mô tả ngắn <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" name="subDescription" placeholder="Nhập mô tả ngắn" value="{!!$article->subDescription!!}">
+                        <input type="text" class="form-control" name="subDescription" placeholder="Nhập mô tả ngắn"
+                            value="{!!$article->subDescription!!}">
                     </div>
                     <div class="form-group">
                         <label for="example-select">Danh mục</label>
                         <select class="form-control" id="example-select" name="categori">
                             @foreach($categori as $data)
-                                <option value="{{$data->id}}" {{ $data->id == $article->categoryIds ? 'selected' : '' }}>{{$data->name}}</option>
+                            <option value="{{$data->id}}" {{ $data->id == $article->categoryIds ? 'selected' : '' }}>
+                                {{$data->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -43,17 +46,21 @@
                             <div>
                                 {{$article->images}}
                             </div>
-                            <input type="file" class="custom-file-input" data-toggle="custom-file-input" id="example-file-input-custom" name="image" accept=".png, .jpg, .jpeg" value="{!!$article->images!!}">
+                            <input type="file" class="custom-file-input" data-toggle="custom-file-input"
+                                id="example-file-input-custom" name="image" accept=".png, .jpg, .jpeg"
+                                onchange="document.getElementById('output').src = window.URL.createObjectURL(this.files[0])">
                             <label class="custom-file-label">Chọn ảnh</label>
                         </div>
+                        <img id="output" src="/{{$article->images}}" width="200" height="100">
                     </div>
 
 
-                    <div class="block" >
+                    <div class="block">
                         <label>Nội dụng bài viết <span class="text-danger">*</span></label>
                         <div class="block-content block-content-full" style="padding: 0px">
                             <!-- Summernote Container -->
-                            <textarea class="js-summernote" name="description" value="{!!$article->description!!}"></textarea>
+                            <textarea class="js-summernote" name="description"
+                                value="{!!$article->description!!}"></textarea>
                         </div>
                     </div>
                 </div>
@@ -72,9 +79,13 @@
 @endsection
 
 @section('js_after')
-    <script>jQuery(function(){ One.helpers(['summernote', 'ckeditor', 'simplemde']); });</script>
-    <script src=" {{ asset('/js/plugins/summernote/summernote-bs4.min.js') }}"></script>
-    <script src=" {{ asset('/js/plugins/ckeditor/ckeditor.js') }}"></script>
-    <!-- page -->
-    <script src=" {{ asset('js/plugins/simplemde/simplemde.min.js') }}"></script>
+<script>
+jQuery(function() {
+    One.helpers(['summernote', 'ckeditor', 'simplemde']);
+});
+</script>
+<script src=" {{ asset('/js/plugins/summernote/summernote-bs4.min.js') }}"></script>
+<script src=" {{ asset('/js/plugins/ckeditor/ckeditor.js') }}"></script>
+<!-- page -->
+<script src=" {{ asset('js/plugins/simplemde/simplemde.min.js') }}"></script>
 @stop
