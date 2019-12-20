@@ -8,10 +8,11 @@
     </div>
     <div class="block-content block-content-full">
         <div class="row">
-            <div class="col-5">
+            <div class="col-3">
                 <form class="d-none d-sm-inline-block" action="/dashboard" method="POST">
                     <div class="input-group input-group-sm">
-                        <input type="text" class="form-control form-control-alt" placeholder="Tìm kiếm theo tên " id="page-header-search-input2" name="page-header-search-input2">
+                        <input type="text" class="form-control form-control-alt" placeholder="Tìm kiếm theo tên "
+                            id="page-header-search-input2" name="page-header-search-input2">
                         <div class="input-group-append">
                             <span class="input-group-text bg-body border-0">
                                 <i class="si si-magnifier"></i>
@@ -20,25 +21,33 @@
                     </div>
                 </form>
             </div>
-            <div class="col-xl-5">
+            <div class="col-6" style="display:flex">
                 <div class="form-group">
-                    <div class="input-daterange input-group" data-date-format="mm/dd/yyyy" data-week-start="1" data-autoclose="true" data-today-highlight="true">
-                        <input type="text" class="form-control" id="example-daterange1" name="example-daterange1" placeholder="From" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                    <div class="input-daterange input-group" data-date-format="dd/mm/yyyy" data-week-start="1"
+                        data-autoclose="true" data-today-highlight="true">
+                        <input type="text" class="form-control" id="fromDate" name="example-daterange1"
+                            placeholder="từ yyyy-mm-dd" data-week-start="1" data-autoclose="true"
+                            data-today-highlight="true">
                         <div class="input-group-prepend input-group-append">
                             <span class="input-group-text font-w600">
                                 <i class="fa fa-fw fa-arrow-right"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control" id="example-daterange2" name="example-daterange2" placeholder="To" data-week-start="1" data-autoclose="true" data-today-highlight="true">
+                        <input type="text" class="form-control" id="toDate" name="example-daterange2"
+                            placeholder="đến yyyy-mm-dd" data-week-start="1" data-autoclose="true"
+                            data-today-highlight="true">
                     </div>
+                    <button class="btn btn-info" style="float:right" id="searchBooking">Tìm kiếm</button>
                 </div>
             </div>
+            <!-- <div class="col-">
+            </div> -->
             <div class="col-2">
                 <button class="btn btn-info" style="float:right">Thêm booking</button>
             </div>
 
         </div>
-        <table class="table table-bordered table-striped table-vcenter js-dataTable-simple">
+        <table class="table table-bordered table-striped table-vcenter js-dataTable-simple" id="dataTable">
             <thead>
                 <tr>
                     <!-- <th class="text-center" style="width: 60px;">STT</th> -->
@@ -54,7 +63,7 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach($booking as $data)
+                @foreach($booking as $data)
                 <tr>
                     <td class="text-center">{{$data->id}}</td>
                     <td class="font-w600 font-size-sm">
@@ -66,14 +75,16 @@
                     <td> {{$data->book_date}} </td>
                     <td> {{$data->time}} </td>
                     <td>
-                       {{$data->note}}
+                        {{$data->note}}
                     </td>
                     <td class="text-center">
                         <div class="btn-group">
-                            <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="xem chi tiết">
+                            <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary"
+                                data-toggle="tooltip" title="xem chi tiết">
                                 <i class=" far fa-eye"></i>
                             </button>
-                            <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="sửa">
+                            <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary"
+                                data-toggle="tooltip" title="sửa">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </button>
                             <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="xóa">
@@ -82,7 +93,7 @@
                         </div>
                     </td>
                 </tr>
-            @endforeach
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -100,4 +111,47 @@
 <!-- <script src=" {{ asset('/js/plugins/datatables/buttons/dataTables.buttons.min.js') }}"></script> -->
 <!-- page -->
 <script src=" {{ asset('/js/pages/be_tables_datatables.min.js') }}"></script>
+<script>
+function doSearch(fr, t) {
+    var d1 = fr.split("-");
+    var d2 = t.split("-");
+    var from = new Date(d1[0], d1[1] - 1, d1[2]);
+    var to = new Date(d2[0], d2[1] - 1, d2[2]);
+    var targetTable = document.getElementById('dataTable');
+    var targetTableColCount;
+    for (var rowIndex = 0; rowIndex < targetTable.rows.length; rowIndex++) {
+        var rowData = [];
+        if (rowIndex == 0) {
+            targetTableColCount = targetTable.rows.item(rowIndex).cells.length;
+            continue;
+        }
+
+        for (var colIndex = 0; colIndex < targetTableColCount; colIndex++) {
+            rowData.push(targetTable.rows.item(rowIndex).cells.item(5).textContent);
+        }
+        for (var i = 0; i < rowData.length; i++) {
+            var c = rowData[i].split("-");
+            var check = new Date(c[0], c[1] - 1, c[2]);
+            if ((check >= from) && (check <= to))
+                targetTable.rows.item(rowIndex).style.display = 'table-row';
+            else
+                targetTable.rows.item(rowIndex).style.display = 'none';
+        }
+    }
+}
+
+// doSearch("2019-12-01", "2019-12-03");
+
+$("#searchBooking").click(function() {
+
+    let fromDate = $("#fromDate").val();
+    let toDate = $("#toDate").val();
+    if (fromDate == "" || toDate == "") {
+        alert("Mời nhập thông tin đầy đủ")
+    } else {
+        doSearch(fromDate, toDate)
+        console.log(fromDate, toDate);
+    }
+})
+</script>
 @stop
