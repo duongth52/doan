@@ -230,6 +230,7 @@
                         console.log(err);
                     },
                 });
+                
                 $(".btn-booking-success").click()
                 location.reload(true);
               break;

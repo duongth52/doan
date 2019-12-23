@@ -134,11 +134,13 @@ class ClientBookingController extends Controller
 
   public function getResult(Request $request) {
 
-    $code = $request->code;
+    $id_patient = $request->id_patient;
 
-    $patient = Patient::where('code', $code)->first();
+    //$patient = Patient::where('id', $id_patient)->get();
 
-    $result = Result::where('id_patient', $patient->id)
+    // $patient = Patient::where('code', $code)->first();
+
+    $result = Result::where('id_patient', $id_patient)
     ->leftJoin('users', 'users.id', '=', 'result.id_doctor')
     ->select('result.*', 'users.name as doctorName')
     ->get();
@@ -147,16 +149,13 @@ class ClientBookingController extends Controller
     $tr = '';
     if(count($result)){
 
-        // {{route('deleteBooking', $data->id)}}
-
-
         foreach ($result as $item) {
             $tr .= '<tr>
                 <td>'.$item->doctorName.'</td>
                 <td>'.$item->description.'</td>
                 <td>'.$item->created_at.'</td>
                 <td>
-                <a href="{{route("showResultClient",'.$item->id .')}}">Xem</a></td>
+                <a href="/xem-chi-tiet-ket-qua/'. $item->id .'">Xem chi tiết</a></td>
 
             </tr>';
         }
