@@ -53,6 +53,7 @@ class BacSiController extends Controller {
                 }
             }
         }
+
         $dataCreate->name = $request->name;
         $dataCreate->phone = $request->phone;
         $dataCreate->email = $request->email;
@@ -65,8 +66,7 @@ class BacSiController extends Controller {
         }
     }
 
-    public function edit($id)
-    {
+    public function edit($id) {
         $khoa = Khoa::all();
         $find = User::findOrFail($id);
         return view('admin.bacsi.suanhanvien', compact('find', 'khoa'));

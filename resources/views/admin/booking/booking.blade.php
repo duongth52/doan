@@ -12,7 +12,7 @@
                 <form class="d-none d-sm-inline-block" action="/dashboard" method="POST">
                     <div class="input-group input-group-sm">
                         <input type="text" class="form-control form-control-alt" placeholder="Tìm kiếm theo tên "
-                            id="page-header-search-input2" name="page-header-search-input2">
+                            id="myInput" name="page-header-search-input2">
                         <div class="input-group-append">
                             <span class="input-group-text bg-body border-0">
                                 <i class="si si-magnifier"></i>
@@ -21,29 +21,29 @@
                     </div>
                 </form>
             </div>
-            <div class="col-6" style="display:flex">
-                <div class="form-group">
-                    <div class="input-daterange input-group" data-date-format="dd/mm/yyyy" data-week-start="1"
+            <div class="col-6">
+                <div class="form-group d-flex">
+                    <div style="max-width: 60%; margin-right: 10px" class="input-daterange input-group" data-date-format="dd/mm/yyyy" data-week-start="1"
                         data-autoclose="true" data-today-highlight="true">
                         <input type="text" class="form-control" id="fromDate" name="example-daterange1"
-                            placeholder="từ yyyy-mm-dd" data-week-start="1" data-autoclose="true"
+                            placeholder="yyyy-mm-dd" data-week-start="1" data-autoclose="true"
                             data-today-highlight="true">
-                        <div class="input-group-prepend input-group-append">
-                            <span class="input-group-text font-w600">
+                            <div class="input-group-prepend input-group-append" style="max-height: 38px">
+                                <span class="input-group-text font-w600">
                                 <i class="fa fa-fw fa-arrow-right"></i>
                             </span>
                         </div>
                         <input type="text" class="form-control" id="toDate" name="example-daterange2"
-                            placeholder="đến yyyy-mm-dd" data-week-start="1" data-autoclose="true"
+                            placeholder="yyyy-mm-dd" data-week-start="1" data-autoclose="true"
                             data-today-highlight="true">
                     </div>
-                    <button class="btn btn-info" style="float:right" id="searchBooking">Tìm kiếm</button>
+                    <button style="max-height: 38px" class="btn btn-info" style="float:right" id="searchBooking">Tìm kiếm</button>
                 </div>
             </div>
             <!-- <div class="col-">
             </div> -->
             <div class="col-2">
-                <button class="btn btn-info" style="float:right">Thêm booking</button>
+                <button style="display: none" class="btn btn-info" style="float:right">Thêm booking</button>
             </div>
 
         </div>
@@ -54,7 +54,7 @@
                     <th class="text-center" style="width: 10%;">Mã BN</th>
                     <th class="text-center">Tên bệnh nhân</th>
                     <th class="text-center" style="width: 10%;">SĐT</th>
-                    <th class="text-center">Tên bác sĩ</th>
+                    <!-- <th class="text-center">Tên bác sĩ</th> -->
                     <th class="text-center" style="width: 5%;">Khoa</th>
                     <th class="text-center" style="width: 12%;">Ngày khám</th>
                     <th class="text-center" style="width: 10%;">Giờ khám</th>
@@ -62,7 +62,7 @@
                     <th class="text-center">Hành động</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="myTable">
                 @foreach($booking as $data)
                 <tr>
                     <td class="text-center">{{$data->id}}</td>
@@ -70,7 +70,7 @@
                         <a href="be_pages_generic_profile.html">{{$data->name}}</a>
                     </td>
                     <td class="font-size-sm">{{$data->phone}}</td>
-                    <td class="font-size-sm">{{$data->doctorName}}</td>
+                    <!-- <td class="font-size-sm">{{$data->doctorName}}</td> -->
                     <td class="font-size-sm">{{$data->khoaName}}</td>
                     <td> {{$data->book_date}} </td>
                     <td> {{$data->time}} </td>
@@ -79,6 +79,10 @@
                     </td>
                     <td class="text-center">
                         <div class="btn-group">
+                            <a href="{{route('createPaitentBooking', $data->id)}}" style="margin-right: 5px" type="button" class="btn btn-sm btn-primary"
+                                data-toggle="tooltip" title="thêm bệnh nhân">
+                                <i class=" far fa-address-book"></i>
+                            </a>
                             <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary"
                                 data-toggle="tooltip" title="xem chi tiết">
                                 <i class=" far fa-eye"></i>
@@ -87,9 +91,9 @@
                                 data-toggle="tooltip" title="sửa">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="xóa">
+                            <a href="{{route('deleteBooking', $data->id)}}" type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="xóa">
                                 <i class="fa fa-fw fa-times"></i>
-                            </button>
+                            </a>
                         </div>
                     </td>
                 </tr>
@@ -112,6 +116,16 @@
 <!-- page -->
 <script src=" {{ asset('/js/pages/be_tables_datatables.min.js') }}"></script>
 <script>
+
+$(document).ready(function() {
+    $("#myInput").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+    });
+});
+
 function doSearch(fr, t) {
     var d1 = fr.split("-");
     var d2 = t.split("-");
@@ -154,4 +168,5 @@ $("#searchBooking").click(function() {
     }
 })
 </script>
+
 @stop

@@ -3,88 +3,92 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Pusher\Pusher;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\sendMailBooking;
 use App\Khoa;
 use App\TimeSlot;
 use App\Booking;
-use App\User;
 use Carbon\Carbon;
+use App\Patient;
+use App\Result;
 
-use PHPUnit\Util\Json;
-use Illuminate\Support\Facades\DB;
-class ClientBookingController extends Controller {
+class ClientBookingController extends Controller
+{
 
-    public function booking() {
-        $khoa = Khoa::all();
-        return view('booking', compact('khoa'));
-    }
+  public function booking()
+  {
+    $khoa = Khoa::all();
+    return view('booking', compact('khoa'));
+  }
 
-    // ajax return timeslot
-    public function showTime(Request $request) {
-        $html = '';
-        $date = $request->date;
-        $timeslot = TimeSlot::all();
+  // ajax return timeslot
+  public function showTime(Request $request)
+  {
 
-        $booking = Booking::select('id_time')->where('book_date', $date)->get();
+    $html = '';
+    $date = $request->date;
+    $timeslot = TimeSlot::all();
 
-        $id_time = array();
-        $count = array();
+    $booking = Booking::select('id_time')->where('book_date', $date)->get();
 
-        foreach($booking as $item) {
-            array_push($id_time, $item->id_time);
-         };
+    $id_time = array();
+    $count = array();
 
-        $count = array_count_values($id_time);
+    foreach ($booking as $item) {
+      array_push($id_time, $item->id_time);
+    };
 
-        if (!$date) {
-            $html = '<div class="col-md-12">Chọn sai ngày</div>';
+    $count = array_count_values($id_time);
+
+    if (!$date) {
+      $html = '<div class="col-md-12">Chọn sai ngày</div>';
+    } else {
+      $index = 0;
+      $count_lenth = count($count);
+
+      foreach ($timeslot as $time) {
+
+        $index++;
+        if ($index > $count_lenth) {
+          $count_slot = 0;
         } else {
-                $index = 0;
-                $count_lenth= count($count);
+          $count_slot = $count[$index];
+        }
 
-                foreach ($timeslot as $time) {
-
-                    $index ++;
-                    if($index > $count_lenth) {
-                        $count_slot = 0;
-                    }else {
-                        $count_slot = $count[$index];
-                    }
-
-                    $html .= '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" class="itemTimeSlot" onClick="getIdTime('.$time->id.')">
-                                <div class="agent-1"  id=time_'.$time->id.'>
+        $html .= '<div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" class="itemTimeSlot" onClick="getIdTime(' . $time->id . ')">
+                                <div class="agent-1"  id=time_' . $time->id . '>
                                     <div class="agent-content">
-                                        <h5 style="margin-bottom: 10px; font-weight: bold; ">'.$time->time.'</h5>
+                                        <h5 style="margin-bottom: 10px; font-weight: bold; ">' . $time->time . '</h5>
                                         <hr style="margin: 0px" />
-                                        <p style="font-weight: bold; "> còn '. ( $time->total - $count_slot ) .'</p>
+                                        <p style="font-weight: bold; "> còn ' . ($time->total - $count_slot) . '</p>
                                     </div>
                                 </div>
                             </div>';
-                }
-        }
-
-        $mytime = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-        $ckeckBooking = Booking::where('email', 'duong@gmail.com')->get();
-
-        $data = array();
-        foreach ($ckeckBooking as $booking){
-            if($booking->created_at->toDateString() === $mytime ) {
-                array_push($data, $booking);
-            }
-        }
-
-        $checkBook_date = $ckeckBooking[0]->book_date;
-
-        return response()->json(['html' => $html, 'count' => count($timeslot), 'time'=>$checkBook_date ]);
+      }
     }
+    $time = TimeSlot::where('id', 3)->get();
+    return response()->json(['html' => $html, 'time' => $time[0]->time]);
+  }
 
 
-    public function createNewBooking() {
+  public function test(Request $request)
+  {
 
-    }
+    $timeNow = new \DateTime(Carbon::now('Asia/Ho_Chi_Minh')->toDateString());
+    $bookingDate = new \DateTime($request->bookingDate);
 
-    public function test(Request $request)
-    {
+    if ($bookingDate > $timeNow) {
+
+      $data = Booking::where('email', '=', $request->email)
+        ->where('book_date', '=', $request->bookingDate)
+        ->get();
+
+      $count = count($data);
+
+      if ($count > 0) {
+        return response()->json(['status' => 301]);
+      } else {
+
         $booking = new Booking();
 
         $booking->name = $request->name;
@@ -97,110 +101,91 @@ class ClientBookingController extends Controller {
         $booking->id_time = $request->id_time;
         $booking->note = $request->note;
 
-
-        if($booking->save()) {
-            $data['title'] = $request->input('title');
-                $data['content'] = $request->input('content');
-
-                $options = array(
-                    'cluster' => 'mt1',
-                    'encrypted' => true
-                );
-
-                $pusher = new Pusher(
-                    env('PUSHER_APP_KEY'),
-                    env('PUSHER_APP_SECRET'),
-                    env('PUSHER_APP_ID'),
-                    $options
-                );
-
-                $pusher->trigger('Notify', 'send-message', $data);
-
+        if ($booking->save()) {
+          $time = TimeSlot::where('id', $booking->id_time)->first();
+          return response()->json(['status' => 200, 'data' => $booking, 'time' => $time->time]);
         }
-        return response()->json(['status' => 200]);
+      }
+    } else {
+      return response()->json(['status' => 302, 'data' => 'Bạn chọn ngày khám chưa chính xác !']);
+    }
+  }
+
+  public function sendMailBooking(Request $request)
+  {
+
+    //   send mail
+    $data = [
+      'name' => $request->name,
+      'date' => $request->date,
+      'time' => $request->time
+    ];
+    Mail::to($request->email)
+      ->send(new sendMailBooking($data));
+
+  //  return response()->json(['status' => 200, 'data' => 'okeeeeeeeeee']);
+  }
+
+  //xem kết quả khám
+  public function showResult() {
+     return view('result');
+  }
 
 
+  public function getResult(Request $request) {
 
+    $code = $request->code;
+
+    $patient = Patient::where('code', $code)->first();
+
+    $result = Result::where('id_patient', $patient->id)
+    ->leftJoin('users', 'users.id', '=', 'result.id_doctor')
+    ->select('result.*', 'users.name as doctorName')
+    ->get();
+
+    $html= '';
+    $tr = '';
+    if(count($result)){
+
+        // {{route('deleteBooking', $data->id)}}
+
+
+        foreach ($result as $item) {
+            $tr .= '<tr>
+                <td>'.$item->doctorName.'</td>
+                <td>'.$item->description.'</td>
+                <td>'.$item->created_at.'</td>
+                <td>
+                <a href="{{route("showResultClient",'.$item->id .')}}">Xem</a></td>
+
+            </tr>';
+        }
+
+        $html = '<h2>Danh sách kết quả: </h2>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tên bác sĩ</th>
+                                <th>Mô tả bệnh</th>
+                                <th>Ngày tạo</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>'.
+                                $tr
+                        .'</tbody>
+                    </table>';
     }
 
-    ///// check
-    public function test1(Request $request) {
 
-        //email k tồn tại => createNew
-        $email = $request->email;
-        $ckeckBooking = Booking::where('email', $email)->get();
-
-        //tạo mới
-        if(!$ckeckBooking) {
-            $booking = new Booking();
-
-            $booking->name = $request->name;
-            $booking->email = $request->email;
-            $booking->birthday = $request->birthday;
-            $booking->gender = $request->gender;
-            $booking->id_khoa = $request->khoa;
-            $booking->phone = $request->phone;
-            $booking->book_date = $request->bookingDate;
-            $booking->id_time = $request->id_time;
-            $booking->note = $request->note;
-
-            $booking->save();
-        }
-        else {
-
-            // $data = array();
-            // $timeDay = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
-
-            // foreach ($ckeckBooking as $booking){
-            //     if($booking->created_at->toDateString() === $timeDay ) {
-            //         array_push($data, $booking);
-            //     }
-            // }
-            // if(!$data)
+    return response()->json(['data' => $html]);
+  }
 
 
-            //check 0 cùng ngày book_date => tạo mới.
+  public function showResultClient($id) {
+      dd($id);
+  }
 
-            $checkBook_date = array();
-            $bookingDate = (string)$request->bookingDate;
-
-            foreach ($ckeckBooking as $booking){
-                if($booking->book_date === $bookingDate) {
-                    array_push($checkBook_date, $booking);
-                }
-            }
-
-            if(!$bookingDate) {
-                //khác ngày
-                $booking = new Booking();
-
-                $booking->name = $request->name;
-                $booking->email = $request->email;
-                $booking->birthday = $request->birthday;
-                $booking->gender = $request->gender;
-                $booking->id_khoa = $request->khoa;
-                $booking->phone = $request->phone;
-                $booking->book_date = $request->bookingDate;
-                $booking->id_time = $request->id_time;
-                $booking->note = $request->note;
-
-                $booking->save();
-
-            }else {
-                //cùng ngày và count_destroy  < 3 => update
-
-                if($bookingDate[0]->count_destroy < 3) {
-
-                }
-
-            }
-
-        }
-
-
-
-        return response()->json(['status' => 200]);
-}
 
 
 }

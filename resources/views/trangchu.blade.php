@@ -10,7 +10,7 @@
         <div class="carousel-inner" role="listbox">
             @foreach($article as $key => $data)
             <div class="item banner-max-height @if($key==0)active @endif">
-                <img style="min-height: 850px;" src="img/banner/banner-slider-4.jpg" alt="banner-slider-1">
+                <img style="min-height: 850px;" src="{{$data->images}}" alt="banner-slider-1">
                 <div class="carousel-caption banner-slider-inner">
                     <div class="banner-content">
                         <h1 data-animation="animated fadeInDown delay-05s">{{$data->name}}</h1>
@@ -50,14 +50,25 @@
         </div>
 
         <div class="row mgn-btm wow">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 wow fadeInLeft delay-04s">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 wow fadeInLeft delay-04s">
                 <div class="content">
-                    <i class="flaticon-apartment"></i>
-                    <h4>Đặt hẹn khám</h4>
+                    <a href="{{route('datlich')}}">
+                        <i class="flaticon-apartment"></i>
+                        <h4>Đặt hẹn khám</h4>
+                    </a>
                 </div>
             </div>
 
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 wow fadeInRight delay-04s">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 wow fadeInRight delay-04s">
+                <div class="content">
+                    <a href="{{route('xemketqua')}}">
+                        <i class="flaticon-vehicle"></i>
+                        <h4>Xem Kết quả</h4>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 wow fadeInRight delay-04s">
                 <div class="content">
                     <i class="flaticon-vehicle"></i>
                     <h4>Lịch làm việc bác sĩ</h4>
@@ -83,9 +94,8 @@
             <div class="col-lg-4 col-md-4 col-sm-6 wow fadeInLeft delay-04s">
                 <div class="thumbnail blog-box-2 clearfix">
                     <div class="blog-photo">
-                        <img style="max-height:220px"
-                            src="http://medicare.bold-themes.com/cardiology/wp-content/uploads/sites/10/2015/08/img-blog-post-01-640x480.jpg"
-                            alt="blog-1" class="img-responsive">
+                        <img style="max-height:220px; min-height:220px" src="{{$data->images}}" alt="blog-1"
+                            class="img-responsive">
                     </div>
                     <!-- Detail -->
                     <div class="caption detail">

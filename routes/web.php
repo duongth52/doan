@@ -1,24 +1,22 @@
 <?php
 //client
-// bỏ thằng đấy đi ,k  dùng   ajax choox nao
 
 Route::get('/home', 'ClientHomeController@home')->name('home');
 Route::get('/dat-lich-kham', 'ClientBookingController@booking')->name('datlich');
-//Route::post('/dat-lich-kham', 'ClientBookingController@saveBooking')->name('saveBooking');
 Route::get('/dat-lich-kham/time/', 'ClientBookingController@showTime')->name('showTime');
 
 Route::post('/ajaxRequest', 'ClientBookingController@test');
+Route::post('/ajaxBooking', 'ClientBookingController@sendMailBooking');
+
+//xem kết quả khám
+Route::get('/xem-ket-qua-kham', 'ClientBookingController@showResult')->name('xemketqua');
+Route::get('/getResult', 'ClientBookingController@getResult');
+Route::get('/xem-chi-tiet-ket-qua/{id}', 'ClientBookingController@showResultClient')->name('showResultClient');
 
 Route::get('/login', 'AdminLoginController@showLogin')->name('showLogin');
 Route::post('/login', 'AdminLoginController@login')->name('login');
 Route::any('/logout', 'AdminLoginController@logout')->name('logout');
 
-Route::view('/loginclient', 'client_login');
-
-//user: admin -> them sua xoa bac si
-//  user -> danh sach booking
-
-//bác sĩ
 Route::group([
     'prefix' => 'admin',
     'middleware' => ['web', 'checkAdmin'],
@@ -29,6 +27,9 @@ Route::group([
     //booking
     Route::get('/danh-sach-booking', 'bookingController@index')->name('danhsachBooking');
     Route::view('/them-booking', 'admin.booking.thembooking')->name('themBooing');
+    //Route::get('/danh-sach-booking-day', 'bookingControlleradmin.booking.thembooking')->name('getBookingDay');
+    Route::get('/them-moi-patient/{id}', 'bookingController@createPaitent')->name('createPaitentBooking');
+    Route::get('/xoa-booking/{id}', 'bookingController@delete')->name('deleteBooking');
 
     //bênh nhân
     Route::get('/danh-sach-benh-nhan', 'PatientController@index')->name('danhsachbenhnhan');
@@ -75,10 +76,7 @@ Route::group([
     Route::post('/sua-ket-qua/{id}', 'ResultController@Update')->name('updateResult');
     Route::get('/xoa-ket-qua/{id}', 'ResultController@delete')->name('deleteResult');
 
-    //sendmail
-    Route::get('/create-mail', 'SendMessageController@createForm')->name('createForm');
 });
 
 // Auth::routes();
-
 // Route::get('/home', 'HomeController@index')->name('home');
