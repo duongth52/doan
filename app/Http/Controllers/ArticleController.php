@@ -65,7 +65,11 @@ class ArticleController extends Controller
         $categori = Categoris::all();
         return view('admin.articles.suabaiviet', compact('article', 'categori'));
     }
-
+    public function showDetailBlog($id)
+    {
+        $article = Articles::findOrFail($id);
+        return view('DetailBlog', compact('article'));
+    }
     public function Update($id, Request $request)
     {
         $pathImg = '';

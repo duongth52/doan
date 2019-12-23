@@ -3,9 +3,9 @@
 // bỏ thằng đấy đi ,k  dùng   ajax choox nao
 
 Route::get('/home', 'ClientHomeController@home')->name('home');
-Route::get('/dat-lich-kham','ClientBookingController@booking')->name('datlich');
+Route::get('/dat-lich-kham', 'ClientBookingController@booking')->name('datlich');
 //Route::post('/dat-lich-kham', 'ClientBookingController@saveBooking')->name('saveBooking');
-Route::get('/dat-lich-kham/time/','ClientBookingController@showTime' )->name('showTime');
+Route::get('/dat-lich-kham/time/', 'ClientBookingController@showTime')->name('showTime');
 
 Route::post('/ajaxRequest', 'ClientBookingController@test');
 
@@ -21,8 +21,8 @@ Route::view('/loginclient', 'client_login');
 //bác sĩ
 Route::group([
     'prefix' => 'admin',
-    'middleware'=>['web','checkAdmin'],
-], function(){
+    'middleware' => ['web', 'checkAdmin'],
+], function () {
     // admin
     Route::view('/', 'dashboard');
 
@@ -40,7 +40,6 @@ Route::group([
     Route::get('/chi-tiet-benh-nhan/{id}', 'PatientController@detail')->name('detailPatient');
 
     Route::get('/them-ket-qua/{id}', 'PatientController@showAddResult')->name('showAddResultPateint');
-
 
     //doctor
     Route::get('/danh-sach-nhan-vien', 'BacSiController@getALL')->name('danhsachnhanvien');
@@ -66,6 +65,7 @@ Route::group([
     Route::get('/sua-bai-viet/{id}', 'ArticleController@showUpdate')->name('showUpdateArticle');
     Route::post('/sua-bai-viet/{id}', 'ArticleController@Update')->name('updateArticle');
     Route::get('/xoa-bai-viet/{id}', 'ArticleController@delete')->name('deleteArticle');
+    Route::get('/chi-tiet-bai-viet/{id}', 'ArticleController@showDetailBlog');
 
     //result
     Route::get('/danh-sach-ket-qua', 'ResultController@listResult')->name('danhSachResult');
@@ -75,12 +75,9 @@ Route::group([
     Route::post('/sua-ket-qua/{id}', 'ResultController@Update')->name('updateResult');
     Route::get('/xoa-ket-qua/{id}', 'ResultController@delete')->name('deleteResult');
 
-
     //sendmail
     Route::get('/create-mail', 'SendMessageController@createForm')->name('createForm');
 });
-
-
 
 // Auth::routes();
 

@@ -89,12 +89,12 @@
                     </div>
                     <!-- Detail -->
                     <div class="caption detail">
-                        <h4><a href="blog-single-sidebar-right.html">{{$data->name}}</a></h4>
+                        <h4><a href="/admin/chi-tiet-bai-viet/{{$data->id}}">{{$data->name}}</a></h4>
                         <!-- paragraph -->
                         <p>{{$data->subDescription}}</p>
                         <div class="clearfix"></div>
                         <!-- Btn -->
-                        <a href="blog-single-sidebar-right.html" class="read-more">Xem thêm...</a>
+                        <a href="/admin/chi-tiet-bai-viet/{{$data->id}}" class="read-more">Xem thêm...</a>
                     </div>
                 </div>
             </div>
@@ -121,21 +121,20 @@
                 </div>
                 <div class="carousel-inner">
                     @foreach($doctors as $key=>$data)
-                    <div class="item @if($key==0)active @endif">
+                    <div class="{{$key==0?'item active':'item' }}">
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <!-- Agent 1 start -->
                             <div class="agent-1">
                                 <!-- Agent img -->
                                 <a href="properties-details.html" class="agent-img">
-                                    <img style="min-height:213px;"
-                                        src="http://medicare.bold-themes.com/laboratory/wp-content/uploads/sites/15/2015/12/pic-team-2.jpg"
-                                        alt="team-1" class="img-responsive">
+                                    <img style="min-height:213px;" src="{{asset($data->images)}}" alt="team-1"
+                                        class="img-responsive">
                                 </a>
                                 <!-- Agent content -->
                                 <div class="agent-content">
                                     <h5><a href="agent-single.html">{{$data->name}}</a></h5>
                                     <h6>{{$data->subDescription}}</h6>
-                                    <ul class="social-list clearfix">
+                                    <ul class=" social-list clearfix">
                                         <li>
                                             <a href="#" class="facebook">
                                                 <i class="fa fa-facebook"></i>
