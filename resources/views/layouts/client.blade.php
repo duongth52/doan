@@ -98,8 +98,8 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a href="index.html" class="logo">
-                                <img src="{{ asset('client/img/logos/logo.png') }}" alt="logo">
+                            <a href="index1.html" class="log" style="padding: 19px 0;float: left;margin-right: 50px;">
+                                <img src="/client/img/logos/logo.png" alt="logo">
                             </a>
                         </div>
                         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -250,7 +250,8 @@
 <!-- <Custom javascript -->
 <script src="{{ asset('client/js/ie10-viewport-bug-workaround.js') }}"></script>
 <!-- toasr -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript"
+    charset="utf-8" async defer></script>
 
 
 @yield('js_after')
