@@ -98,8 +98,8 @@
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </button>
-                            <a href="index.html" class="logo">
-                                <img src="{{ asset('client/img/logos/logo.png') }}" alt="logo">
+                            <a href="index1.html" class="logo" style="padding: 19px 0;float: left;margin-right: 50px;">
+                                <img src="/client/img/logos/logo.png" alt="logo">
                             </a>
                         </div>
                         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -107,12 +107,11 @@
                             id="app-navigation">
                             <ul class="nav navbar-nav">
                                 <li class="dropdown active">
-                                    <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">Trang
-                                        chủ</a>
+                                    <a  href="{{route('home')}}" >Trang chủ</a>
                                 </li>
-                                <li class="dropdown mega-dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Giới thiệu</a>
-                                </li>
+                                <!-- <li class="dropdown mega-dropdown">
+                                    <a href="{{route('datlich')}}" class="dropdown-toggle" data-toggle="dropdown">Giới thiệu</a>
+                                </li> -->
                                 <li class="dropdown">
                                     <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">Chuyên
                                         khoa</a>
@@ -122,7 +121,7 @@
                                         làm việc bác sĩ</a>
                                 </li>
                                 <li class="dropdown mega-dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Liên hệ</a>
+                                    <a href="{{route('contact')}}" >Liên hệ</a>
                                 </li>
                             </ul>
                             <ul class="nav navbar-nav navbar-right rightside-navbar">
@@ -160,7 +159,7 @@
                                         </li>
                                         <li>
                                             <i class="fa fa-envelope"></i>
-                                            Email:<a href="mailto:sales@hotelempire.com">datnv1997@gmail.com</a>
+                                            Email:<a href="mailto:sales@hotelempire.com">vanthanh@gmail.com</a>
                                         </li>
                                         <li>
                                             <i class="fa fa-phone"></i>
@@ -206,7 +205,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <div class="footer-item">
                                     <div class="main-title-2">
-                                        <h1>Phòng khám nhi Hồng Dương</h1>
+                                        <h1>Phòng khám nhi Bs. Thành</h1>
                                     </div>
                                     <div class="newsletter clearfix">
                                         <img src="/client/img/logos/logo.png">

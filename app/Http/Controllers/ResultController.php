@@ -40,6 +40,7 @@ class ResultController extends Controller
                 $patient = Patient::where('id',$request->id_patient)->first();
                 //send mail
                 $data = [
+                    'id'=>$patient->id,
                     'patient'=>$patient->name,
                     'prescription' => $result->prescription,
                     'content_result' => substr($result->content_result, 1, -1),

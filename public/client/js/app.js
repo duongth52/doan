@@ -7,7 +7,7 @@ $(function () {
             $(".page_loader").fadeOut("fast");
         }, 100)
         $('link[id="style_sheet"]').attr('href', 'css/skins/default.css');
-        $('.logo img').attr('src', 'img/logos/logo.png');
+        $('.logo img').attr('src', '/client/img/logos/logo.png');
 
         // Filterizr initialization
         if($('.filtr-container').length > 0) {
@@ -274,7 +274,7 @@ $(function () {
         var name = $(this).attr('data-color');
         $('link[id="style_sheet"]').attr('href', 'css/skins/' + name + '.css');
         if (name == 'default') {
-            $('.logo img').attr('src', 'img/logos/logo.png');
+            $('.logo img').attr('src', '/client/img/logos/logo.png');
         }
         else {
             $('.logo img').attr('src', 'img/logos/' + name + '-logo.png');

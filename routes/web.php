@@ -1,9 +1,13 @@
 <?php
 //client
 
-Route::get('/home', 'ClientHomeController@home')->name('home');
+Route::get('/', 'ClientHomeController@home')->name('home');
 Route::get('/dat-lich-kham','ClientBookingController@booking')->name('datlich');
 Route::get('/dat-lich-kham/time/','ClientBookingController@showTime' )->name('showTime');
+
+//contact
+Route::get('/lien-he', 'ClientContactController@index')->name('contact');
+
 
 Route::post('/ajaxRequest', 'ClientBookingController@test');
 Route::post('/ajaxBooking', 'ClientBookingController@sendMailBooking');
@@ -72,6 +76,7 @@ Route::group([
     Route::get('/sua-bai-viet/{id}', 'ArticleController@showUpdate')->name('showUpdateArticle');
     Route::post('/sua-bai-viet/{id}', 'ArticleController@Update')->name('updateArticle');
     Route::get('/xoa-bai-viet/{id}', 'ArticleController@delete')->name('deleteArticle');
+    Route::get('/chi-tiet-bai-viet/{id}', 'ArticleController@showDetailBlog');
 
     //result
     Route::get('/danh-sach-ket-qua', 'ResultController@listResult')->name('danhSachResult');

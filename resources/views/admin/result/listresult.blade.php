@@ -33,7 +33,6 @@
                     <th>Tên bệnh nhân</th>
                     <th>Tên bác sĩ</th>
                     <th>Mô tả kết quả</th>
-                    <th>Đơn thuốc</th>
                     <th style="width: 15%;">Ngày tạo</th>
                     <th class="text-center" style="width: 15%;">Hành động</th>
                 </tr>
@@ -48,10 +47,15 @@
                         <td class="font-size-sm">{{$data->doctorName}}</td>
                         <td class="font-size-sm">{{$data->description}}</td>
                         <td class="font-size-sm">{{$data->created_at}}</td>
-                        <td class="font-size-sm">{{$data->created_at}}</td>
                         <td>
-                            <a class="btn btn-info" href="{{route('showUpdateResult', $data->id)}}">Sửa</a>
-                            <a href="{{route('deleteResult', $data->id)}}">Xóa</a>
+                            <a href="{{route('showUpdateResult', $data->id)}}" style="margin-right: 5px" type="button"
+                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="Sửa">
+                                <i class="fa fa-fw fa-pencil-alt"></i>
+                            </a>
+                            <a href="{{route('deleteResult', $data->id)}}" type="button" class="btn btn-sm btn-danger"
+                                data-toggle="tooltip" title="Xóa">
+                                <i class="fa fa-fw fa-times"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

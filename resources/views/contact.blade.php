@@ -3,7 +3,9 @@
 @section('content')
 
 <!-- Sub banner start -->
-<div class="sub-banner overview-bgi">
+<div class="sub-banner overview-bgi " style="background: url('{{$contact[0]->images}}') no-repeat ;     background-size: cover;
+    object-fit: cover;
+    background-position: center center;">
         <div class="overlay">
             <div class="container">
                 <div class="breadcrumb-area">
@@ -98,7 +100,7 @@
                             <div class="media-body">
                                 <h4>Email</h4>
                                 <p>
-                                    <a href="mailto:info@themevessel.com">duongth@gmail.com</a>
+                                    <a href="mailto:info@themevessel.com">vanthanh@gmail.com</a>
                                 </p>
 
                             </div>

@@ -11,7 +11,7 @@
                 <form class="d-none d-sm-inline-block" action="/dashboard" method="POST">
                     <div class="input-group input-group-sm">
                         <input type="text" class="form-control form-control-alt" placeholder="Tìm kiếm theo tên "
-                            id="page-header-search-input2" name="page-header-search-input2">
+                            id="myInput" name="page-header-search-input2">
                         <div class="input-group-append">
                             <span class="input-group-text bg-body border-0">
                                 <i class="si si-magnifier"></i>
@@ -39,22 +39,18 @@
                     <th class="text-center" style="width: 15%;">Hành động</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="myTable">
                 @foreach($obj as $data)
-
                 <tr>
                     <td class="text-center">{{$data->id}}</td>
                     <td class="font-w600 font-size-sm">
                         <a href="be_pages_generic_profile.html">{{$data->name}}</a>
                     </td>
                     <td class="font-size-sm">{{$data->email}}</td>
-                    <td class="font-size-sm">{{$data->sdt}}</td>
+                    <td class="font-size-sm">{{$data->phone}}</td>
                     <td>
                         {{ $data->gioitinh ? "Nữ" : "Nam" }}
                     </td>
-                    <!-- <td>
-                            <span class="badge badge-success">Hoạt động</span>
-                        </td> -->
                     @if(Auth::user()->role === 'superadmin')
                     <td class="text-center">
                         <div class="btn-group">
@@ -90,9 +86,7 @@
                         </div>
                     </td>
                     @endif
-
                 </tr>
-
                 @endforeach
             </tbody>
         </table>
@@ -108,4 +102,16 @@
 <!-- <script src=" {{ asset('/js/plugins/datatables/buttons/dataTables.buttons.min.js') }}"></script> -->
 <!-- page -->
 <script src=" {{ asset('/js/pages/be_tables_datatables.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+
 @stop

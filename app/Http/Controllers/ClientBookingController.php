@@ -175,16 +175,15 @@ class ClientBookingController extends Controller
                         .'</tbody>
                     </table>';
     }
-
-
     return response()->json(['data' => $html]);
   }
 
-
   public function showResultClient($id) {
-      dd($id);
+
+    $detailResult = Result::where('id', $id)->first();
+// dd($result);
+    //   $detailResult = Result::where('id', $id)->first();
+
+    return view('detailResult', compact('detailResult'));
   }
-
-
-
 }

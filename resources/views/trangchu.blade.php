@@ -62,7 +62,7 @@
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 wow fadeInRight delay-04s">
                 <div class="content">
                     <a href="{{route('xemketqua')}}">
-                        <i class="flaticon-vehicle"></i>
+                        <i class="flaticon-monitor"></i>
                         <h4>Xem Kết quả</h4>
                     </a>
                 </div>
@@ -94,18 +94,17 @@
             <div class="col-lg-4 col-md-4 col-sm-6 wow fadeInLeft delay-04s">
                 <div class="thumbnail blog-box-2 clearfix">
                     <div class="blog-photo">
-                        <img style="max-height:220px; min-height:220px"
-                            src="{{$data->images}}"
-                            alt="blog-1" class="img-responsive">
+                        <img style="max-height:220px; min-height:220px" src="{{$data->images}}" alt="blog-1"
+                            class="img-responsive">
                     </div>
                     <!-- Detail -->
                     <div class="caption detail">
-                        <h4><a href="blog-single-sidebar-right.html">{{$data->name}}</a></h4>
+                        <h4><a href="/admin/chi-tiet-bai-viet/{{$data->id}}">{{$data->name}}</a></h4>
                         <!-- paragraph -->
                         <p>{{$data->subDescription}}</p>
                         <div class="clearfix"></div>
                         <!-- Btn -->
-                        <a href="blog-single-sidebar-right.html" class="read-more">Xem thêm...</a>
+                        <a href="/admin/chi-tiet-bai-viet/{{$data->id}}" class="read-more">Xem thêm...</a>
                     </div>
                 </div>
             </div>
@@ -132,21 +131,20 @@
                 </div>
                 <div class="carousel-inner">
                     @foreach($doctors as $key=>$data)
-                    <div class="item @if($key==0)active @endif">
+                    <div class="{{$key==0?'item active':'item' }}">
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <!-- Agent 1 start -->
                             <div class="agent-1">
                                 <!-- Agent img -->
                                 <a href="properties-details.html" class="agent-img">
-                                    <img style="min-height:250px; max-height:250px"
-                                        src="{{$data->images}}"
-                                        alt="team-1" class="img-responsive">
+                                    <img style="min-height:270px; max-height: 270px; object-fit:cover " src="{{asset($data->images)}}" alt="team-1"
+                                        class="img-responsive">
                                 </a>
                                 <!-- Agent content -->
                                 <div class="agent-content">
                                     <h5><a href="agent-single.html">{{$data->name}}</a></h5>
                                     <h6>{{$data->subDescription}}</h6>
-                                    <ul class="social-list clearfix">
+                                    <ul class=" social-list clearfix">
                                         <li>
                                             <a href="#" class="facebook">
                                                 <i class="fa fa-facebook"></i>
@@ -191,11 +189,11 @@
     style="background: url('http://medicare.bold-themes.com/cardiology/wp-content/uploads/sites/10/2018/02/page-headline-04.jpg');">
     <div class="container">
         <div class="row">
-            <div class="col-md-3 col-sm-6 bordered-right">
+            <!-- <div class="col-md-3 col-sm-6 bordered-right">
                 <div class="counter-box">
                     <i class="flaticon-tag"></i>
                     <h1 class="counter">967</h1>
-                    <p>Listings For Sale</p>
+                    <p>Bệnh nhân</p>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6 bordered-right">
@@ -204,19 +202,19 @@
                     <h1 class="counter">1276</h1>
                     <p>Listings For Rent</p>
                 </div>
-            </div>
-            <div class="col-md-3 col-sm-6 bordered-right">
+            </div> -->
+            <div class="col-md-6 col-sm-6 bordered-right">
                 <div class="counter-box">
                     <i class="flaticon-people"></i>
                     <h1 class="counter">396</h1>
-                    <p>Agents</p>
+                    <p>Bệnh nhân</p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-6 col-sm-6">
                 <div class="counter-box">
                     <i class="flaticon-people-1"></i>
                     <h1 class="counter">177</h1>
-                    <p>Brokers</p>
+                    <p>Bác sĩ</p>
                 </div>
             </div>
         </div>

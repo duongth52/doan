@@ -83,10 +83,10 @@
                                 data-toggle="tooltip" title="thêm bệnh nhân">
                                 <i class=" far fa-address-book"></i>
                             </a>
-                            <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary"
+                            <!-- <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary"
                                 data-toggle="tooltip" title="xem chi tiết">
                                 <i class=" far fa-eye"></i>
-                            </button>
+                            </button> -->
                             <button style="margin-right: 5px" type="button" class="btn btn-sm btn-primary"
                                 data-toggle="tooltip" title="sửa">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
