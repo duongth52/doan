@@ -20,7 +20,17 @@
             <h1 class="block-title" style="text-align: center;">Nhập thông tin kết quả</h1>
             <p style="margin: 0px auto; border: 1px solid blue; width: 8%;"></p>
         </div>
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         <form method="post" action="{{route('createResult')}}" enctype="multipart/form-data">
+
             @csrf
             <div class="row" style="min-width:100%; margin-top: 30px">
 

@@ -15,6 +15,16 @@ class AdminLoginController extends Controller
     }
 
     public function login(Request $request){
+        $validatedData = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required',
+            ],
+            [
+                'email.required' => 'Ban chua nhap email',
+                'email.email'=> 'Chua dung dinh dang email',
+                'password.required' => 'Ban chua nhap mat khau',    
+            ]
+        );
         $email = $request->email;
         $password = $request->password;
         if (Auth::attempt(['email' => $email, 'password' => $password,])) {

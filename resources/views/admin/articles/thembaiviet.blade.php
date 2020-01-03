@@ -7,6 +7,15 @@
 
 @section('content')
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="block" style="margin-bottom: 0px; height: 100%;">
     <div class="block-header">
         <h1 class="block-title">Thêm mới bài viết

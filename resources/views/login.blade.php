@@ -1,6 +1,7 @@
 @extends('layouts.client')
 
 @section('content')
+
 <div class="row">
     <div class="col-lg-12">
         <!-- Form content box start -->
@@ -13,6 +14,15 @@
                 </div>
                 <!-- Form start -->
                 <form action="{{route('login')}}" method="POST">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                     @csrf
                     <div class="form-group">
                         <input type="email" name="email" class="input-text" placeholder="Email Address">

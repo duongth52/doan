@@ -23,6 +23,20 @@ class ArticleController extends Controller
     }
     public function Create(Request $request)
     {
+         $validatedData = $request->validate([
+                'name' => 'required',
+                'subDescription' => 'required',
+                'categori' => 'required',
+                'description' => 'required',
+
+            ],
+            [
+                'name.required' => 'Bạn chưa nhập tên bài viết',
+                'subDescription.required' => 'Bạn chưa nhập mô tả ngắn ',
+                'description.required' => 'Bạn chưa nhập nội dung bài viết',
+                
+            ]
+        );
         $pathImg = '';
         $dataCreate = new Articles();
         $namefile = '';

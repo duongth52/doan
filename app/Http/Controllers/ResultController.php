@@ -28,6 +28,19 @@ class ResultController extends Controller
 
     public function Create(Request $request){
 
+             $validatedData = $request->validate([
+                    'content_result' => 'required',
+                    'prescription' => 'required',
+                    'description' => 'required',
+
+                ],
+                [
+                    'prescription.required' => 'Ban chua nhap đơn thuốc',
+                    'content_result.required' => 'Bạn chưa nhập kêt quá',
+                    'description.required' => 'Bạn cần nhập miêu tả tình trạng bệnh',
+                    
+                ]
+            );
             $result = new Result();
 
             $result->id_doctor = Auth::user()->id;

@@ -21,6 +21,15 @@ class CategoriController extends Controller
 
     public function Create(Request $request)
     {
+         $validatedData = $request->validate([
+                'name' => 'required',
+                'description' => 'required',
+            ],
+           [
+                'name.required'=>'Bạn chưa nhập tên danh mục',
+                'description.required'=>'Bạn chưa nhập tên miêu tả danh mục',
+           ]
+        );
 
         $pathImg = '';
 
