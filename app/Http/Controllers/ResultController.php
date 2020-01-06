@@ -103,4 +103,20 @@ class ResultController extends Controller
         return redirect()->route('danhSachResult');
 
     }
+    public function detail($id){
+        $result = Result::leftJoin('users', 'users.id', '=', 'result.id_doctor')
+        ->leftJoin('patient', 'patient.id', '=', 'result.id_patient')
+        ->select('result.*', 'users.name as doctorName', 'patient.name as patientName')
+        ->where('result.id', '=',$id)
+        ->first();
+
+        $query = Result::leftJoin('users', 'users.id', '=', 'result.id_doctor')
+        ->leftJoin('patient', 'patient.id', '=', 'result.id_patient')
+        ->select('result.*', 'users.name as doctorName', 'patient.name as patientName')
+        ->where('id_patient', $result->id_patient)
+        ->get();
+ 
+        return view('admin.result.showresult', compact('result', 'query'));
+        
+    }
 }

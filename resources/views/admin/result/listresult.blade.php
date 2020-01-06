@@ -47,15 +47,13 @@
                         <td class="font-size-sm">{{$data->doctorName}}</td>
                         <td class="font-size-sm">{{$data->description}}</td>
                         <td class="font-size-sm">{{$data->created_at}}</td>
-                        <td>
-                            <a href="{{route('showUpdateResult', $data->id)}}" style="margin-right: 5px" type="button"
-                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="Sửa">
-                                <i class="fa fa-fw fa-pencil-alt"></i>
+                        <td class="text-center"> 
+                            <a href="{{route('detailResult', $data->id)}}" style="margin-right: 5px" type="button"
+                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="Xem chi tiết">
+                                <i class=" far fa-eye"></i>
                             </a>
-                            <a href="{{route('deleteResult', $data->id)}}" type="button" class="btn btn-sm btn-danger"
-                                data-toggle="tooltip" title="Xóa">
-                                <i class="fa fa-fw fa-times"></i>
-                            </a>
+                            
+
                         </td>
                     </tr>
                 @endforeach
