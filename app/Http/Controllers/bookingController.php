@@ -6,12 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Booking;
 use App\Patient;
+use Carbon\Carbon;
 
 class bookingController extends Controller
 {
-    public function index()
-    {
-
+    public function index() {
         $booking = Booking::leftJoin('users', 'users.id', '=', 'booking.id_doctor')
             ->leftJoin('khoa', 'khoa.id', '=', 'booking.id_khoa')
             ->leftJoin('timeslot', 'timeslot.id', '=', 'booking.id_time')
@@ -22,9 +21,21 @@ class bookingController extends Controller
         return view('admin.booking.booking', compact('booking'));
     }
 
+
+    public function listBookingToday() {
+        $timeNow = new \DateTime(Carbon::now('Asia/Ho_Chi_Minh')->toDateString());
+        $booking = Booking::leftJoin('users', 'users.id', '=', 'booking.id_doctor')
+            ->leftJoin('khoa', 'khoa.id', '=', 'booking.id_khoa')
+            ->leftJoin('timeslot', 'timeslot.id', '=', 'booking.id_time')
+            ->select('booking.*', 'users.name as doctorName', 'khoa.name as khoaName', 'timeslot.time')
+            ->where('book_date', $timeNow)
+            ->get();
+
+        return view('admin.booking.bookingtoday', compact('booking'));
+    }
+
     public function createPaitent($id) {
         $booking = Booking::findOrFail($id);
-
         $patient = Patient::where('email', $booking->email )->get();
         if(count($patient) === 0 ) {
             $patientNew = new Patient();

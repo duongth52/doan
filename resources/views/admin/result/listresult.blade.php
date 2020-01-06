@@ -10,7 +10,7 @@
             <div class="col-6">
                 <form class="d-none d-sm-inline-block" action="/dashboard" method="POST">
                     <div class="input-group input-group-sm">
-                        <input type="text" class="form-control form-control-alt" placeholder="Tìm kiếm theo tên " id="page-header-search-input2" name="page-header-search-input2">
+                        <input type="text" class="form-control form-control-alt" placeholder="Tìm kiếm theo tên " id="myInput" name="page-header-search-input2">
                         <div class="input-group-append">
                             <span class="input-group-text bg-body border-0">
                                 <i class="si si-magnifier"></i>
@@ -37,7 +37,7 @@
                     <th class="text-center" style="width: 15%;">Hành động</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="myTable">
                 @foreach($result as $data)
                     <tr>
                         <td class="text-center">{{$data->id}}</td>
@@ -47,15 +47,19 @@
                         <td class="font-size-sm">{{$data->doctorName}}</td>
                         <td class="font-size-sm">{{$data->description}}</td>
                         <td class="font-size-sm">{{$data->created_at}}</td>
-                        <td>
+                        <td class="text-center">
                             <a href="{{route('showUpdateResult', $data->id)}}" style="margin-right: 5px" type="button"
+                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="Xem chi tiết">
+                                <i class=" far fa-eye"></i>
+                            </a>
+                            <!-- <a href="{{route('showUpdateResult', $data->id)}}" style="margin-right: 5px" type="button"
                                 class="btn btn-sm btn-primary" data-toggle="tooltip" title="Sửa">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </a>
                             <a href="{{route('deleteResult', $data->id)}}" type="button" class="btn btn-sm btn-danger"
                                 data-toggle="tooltip" title="Xóa">
                                 <i class="fa fa-fw fa-times"></i>
-                            </a>
+                            </a> -->
                         </td>
                     </tr>
                 @endforeach
@@ -73,4 +77,15 @@
 <!-- <script src=" {{ asset('/js/plugins/datatables/buttons/dataTables.buttons.min.js') }}"></script> -->
 <!-- page -->
 <script src=" {{ asset('/js/pages/be_tables_datatables.min.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 @stop

@@ -10,8 +10,7 @@
             <div class="col-6">
                 <form class="d-none d-sm-inline-block" action="/dashboard" method="POST">
                     <div class="input-group input-group-sm">
-                        <input type="text" class="form-control form-control-alt" placeholder="Tìm kiếm theo tên "
-                            id="myInput" name="page-header-search-input2">
+                        <input type="text" class="form-control form-control-alt" placeholder="Tìm kiếm theo tên " id="myInput" name="page-header-search-input2">
                         <div class="input-group-append">
                             <span class="input-group-text bg-body border-0">
                                 <i class="si si-magnifier"></i>
@@ -54,16 +53,13 @@
                     @if(Auth::user()->role === 'superadmin')
                     <td class="text-center">
                         <div class="btn-group">
-                            <a href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button"
-                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="xem chi tiết">
+                            <a href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="xem chi tiết">
                                 <i class=" far fa-eye"></i>
                             </a>
-                            <a href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button"
-                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="sửa">
+                            <a href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="sửa">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </a>
-                            <a href="{{route('delete', $data->id)}}" type="button" class="btn btn-sm btn-danger"
-                                data-toggle="tooltip" title="xóa">
+                            <a href="#"type="button"style="padding: 3px 7px;" data-toggle="modal" data-toggle="tooltip" data-target="#delete{{$data->id}}"class="btn btn-danger" title="xóa">
                                 <i class="fa fa-fw fa-times"></i>
                             </a>
                         </div>
@@ -71,22 +67,37 @@
                     @elseif(Auth::user()->role === 'admin')
                     <td class="text-center">
                         <div class="btn-group">
-                            <a href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button"
-                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="xem chi tiết">
+                            <a href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="xem chi tiết">
                                 <i class=" far fa-eye"></i>
                             </a>
-                            <a style="margin-right: 5px" type="button"
-                                class="btn btn-sm btn-primary" data-toggle="tooltip" title="sửa">
+                            <a style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="sửa">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </a>
-                            <a  type="button" class="btn btn-sm btn-danger"
-                                data-toggle="tooltip" title="xóa">
+                            <a type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="xóa">
                                 <i class="fa fa-fw fa-times"></i>
                             </a>
                         </div>
                     </td>
                     @endif
                 </tr>
+
+                <div class="modal fade" id="delete{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Bạn chắc chắn muốn xoá không ?</div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <a class="btn btn-danger" href="{{route('delete', $data->id)}}">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 @endforeach
             </tbody>
         </table>

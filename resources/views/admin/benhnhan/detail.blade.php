@@ -69,13 +69,13 @@
 
                                     <td class="text-center">
                                         <div class="btn-group">
-                                            <a href="" style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Xem chi tiết">
+                                            <!-- <a href="{{route('detailPatient', $data->id)}}" style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Xem chi tiết">
                                                 <i class=" far fa-eye"></i>
-                                            </a>
-                                            <a href="" style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Sửa">
+                                            </a> -->
+                                            <a href="{{route('showUpdateResult', $data->id)}}" style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="Sửa">
                                                 <i class="fa fa-fw fa-pencil-alt"></i>
                                             </a>
-                                            <a href="" type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Xóa">
+                                            <a href="{{route('deleteResult', $data->id)}}" type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="Xóa">
                                                 <i class="fa fa-fw fa-times"></i>
                                             </a>
                                         </div>

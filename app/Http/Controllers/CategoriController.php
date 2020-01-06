@@ -24,10 +24,9 @@ class CategoriController extends Controller
          $validatedData = $request->validate([
                 'name' => 'required',
                 'description' => 'required',
-            ],
-           [
+            ],[
                 'name.required'=>'Bạn chưa nhập tên danh mục',
-                'description.required'=>'Bạn chưa nhập tên miêu tả danh mục',
+                'description.required'=>'Bạn chưa nhập tên mô tả danh mục',
            ]
         );
 
@@ -91,9 +90,9 @@ class CategoriController extends Controller
         }
     }
 
-    public function delete($id)
-    {
+    public function delete($id) {
+
         Categori::destroy($id);
-        return redirect('/danh-sach-danh-muc');
+        return redirect('admin/danh-sach-danh-muc');
     }
 }

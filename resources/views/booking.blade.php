@@ -108,13 +108,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><strong>Đặt lịch thành công</strong></h4>
+                <h4 class="modal-title"><strong>Thông báo</strong></h4>
             </div>
             <div class="modal-body" id="modal-content">
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button id="closemodal" type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
             </div>
         </div>
 
@@ -212,10 +212,12 @@
                             case 200:
 
                                 $("#modal-content").html(
+                                    "<div id=\"content-model\">"+
                                     "<p><strong >Tên bệnh nhân: </strong>" + data.data.name + "</p>" +
                                     "<p><strong>Ngày khám: </strong>" + data.data.book_date + "</p>" +
                                     "<p><strong>Giờ khám: </strong>" + data.time + "</p>" +
-                                    "<p><strong>Địa chỉ: </strong> 175 Tây Sơn, Đống Đa, Hà Nội </p>"
+                                    "<p><strong>Địa chỉ: </strong> 175 Tây Sơn, Đống Đa, Hà Nội </p>"+
+                                    "</div>"
                                 );
 
                                 //send mail booking
@@ -245,13 +247,17 @@
                                 break;
                             case 301:
                                 $("#modal-content").html(
-                                    "<p>Ngày khám đã tồn tại !</p>"
+                                    "<div id=\"content-model\">"+
+                                        "<p>Ngày khám đã tồn tại !</p>" +
+                                    "</div>"
                                 );
                                 $(".btn-booking-success").click()
                                 break;
                             case 302:
                                 $("#modal-content").html(
-                                    "<p>Bạn chọn ngày khám chưa chính xác !</p>"
+                                    "<div id=\"content-model\">"+
+                                        "<p>Bạn chọn ngày khám chưa chính xác !</p>" +
+                                    "</div>"
                                 );
                                 $(".btn-booking-success").click()
                                 break;
@@ -265,18 +271,34 @@
                     },
                 });
             }else {
-                alert('Bạn nhập sai định dạng Email hoặc số điện thoại')
+                // /alert('Bạn nhập sai định dạng Email hoặc số điện thoại')
+                $("#modal-content").html(
+                    "<div id=\"content-model\">"+
+                        "<p>Bạn nhập sai định dạng Email hoặc số điện thoại !</p>"+
+                    "</div>"
+                );
+                $(".btn-booking-success").click()
             }
 
         } else {
-            alert('Bạn cần nhập đầy đủ thông tin !')
-        }
+          //  alert('Bạn cần nhập đầy đủ thông tin !')
+           $("#modal-content").html(
+                "<div id=\"content-model\">"+
+                    "<p>Bạn cần nhập đầy đủ thông tin !</p>"+
+                "</div>"
+            );
+            $(".btn-booking-success").click()
+         }
 
     });
 
+    $('#closemodal').click(function() {
+        if($('#content-model')){
+            console.log(111)
+            $('#content-model').remove();
+        }
+    });
+    
 
-    //   function sendMailBooking() {
-    //       alert('okeeee')
-    //   }
 </script>
 @stop

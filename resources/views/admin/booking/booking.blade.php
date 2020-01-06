@@ -38,6 +38,7 @@
                             data-today-highlight="true">
                     </div>
                     <button style="max-height: 38px" class="btn btn-info" style="float:right" id="searchBooking">Tìm kiếm</button>
+                    <a href="{{route('listBookingToDay')}}" style="max-height: 38px; margin-left: 10px" class="btn btn-info" style="float:right" id="searchBooking">Hôm nay</a>
                 </div>
             </div>
             <!-- <div class="col-">
@@ -91,12 +92,31 @@
                                 data-toggle="tooltip" title="sửa">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </button>
-                            <a href="{{route('deleteBooking', $data->id)}}" type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="xóa">
+                            <a href="#" style="padding: 3px 7px;" data-toggle="modal" data-toggle="tooltip" data-target="#delete{{$data->id}}"class="btn btn-danger" title="xóa">
                                 <i class="fa fa-fw fa-times"></i>
                             </a>
                         </div>
                     </td>
                 </tr>
+
+
+                <div class="modal fade" id="delete{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">Bạn chắc chắn muốn xoá không ?</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                    <a class="btn btn-danger" href="{{route('deleteBooking', $data->id)}}">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
             </tbody>
         </table>
@@ -127,6 +147,8 @@ $(document).ready(function() {
 });
 
 function doSearch(fr, t) {
+    console.log('fr.......', fr)
+    console.log('t......',  t)
     var d1 = fr.split("-");
     var d2 = t.split("-");
     var from = new Date(d1[0], d1[1] - 1, d1[2]);
@@ -164,7 +186,7 @@ $("#searchBooking").click(function() {
         alert("Mời nhập thông tin đầy đủ")
     } else {
         doSearch(fromDate, toDate)
-        console.log(fromDate, toDate);
+        console.log(doSearch(fromDate, toDate));
     }
 })
 </script>

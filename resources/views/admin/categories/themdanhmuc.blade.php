@@ -1,9 +1,9 @@
 @extends('layouts.backend')
 
 @section('content')
-<h1>Create Post</h1>
 
 @if ($errors->any())
+<h1>Lỗi</h1>
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)

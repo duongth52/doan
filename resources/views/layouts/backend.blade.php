@@ -18,6 +18,7 @@
         <link rel="icon" sizes="192x192" type="image/png" href="{{ asset('media/favicons/favicon-192x192.png') }}">
         <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('media/favicons/apple-touch-icon-180x180.png') }}">
 
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
         <!-- Fonts and Styles -->
         @yield('css_before')
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,600,700%7COpen+Sans:300,400,400italic,600,700">
@@ -131,7 +132,7 @@
                             </a>
                             <ul class="nav-main-submenu">
                                 <li class="nav-main-item">
-                                    <a class="nav-main-link{{ request()->is('examples/plugin-helper') ? ' active' : '' }}" href="{{route('danhsachBooking')}}">
+                                    <a class="nav-main-link{{ request()->is('examples/plugin-helper') ? ' active' : '' }}" href="{{route('listBookingToDay')}}">
                                         <span class="nav-main-link-name">Danh sách Booking</span>
                                     </a>
                                 </li>
@@ -196,7 +197,7 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
+                        <!-- <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="#">
                                 <i class="nav-main-link-icon si si-bulb"></i>
                                 <span class="nav-main-link-name">Khoa</span>
@@ -213,7 +214,7 @@
                                     </a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <li class="nav-main-item{{ request()->is('examples/*') ? ' open' : '' }}">
                             <a class="nav-main-link nav-main-link-submenu" data-toggle="submenu" aria-haspopup="true" aria-expanded="true" href="{{route('danhSachCategori')}}">
                                 <i class="nav-main-link-icon si si-bulb"></i>
@@ -477,10 +478,10 @@
                 <div class="content py-3">
                     <div class="row font-size-sm">
                         <div class="col-sm-6 order-sm-2 py-1 text-center text-sm-right">
-                            Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="https://1.envato.market/ydb" target="_blank">pixelcave</a>
+                            <!-- Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="https://1.envato.market/ydb" target="_blank">pixelcave</a> -->
                         </div>
                         <div class="col-sm-6 order-sm-1 py-1 text-center text-sm-left">
-                            <a class="font-w600" href="https://1.envato.market/xWy" target="_blank">OneUI</a> &copy; <span data-toggle="year-copy"></span>
+                            <!-- <a class="font-w600" href="https://1.envato.market/xWy" target="_blank">OneUI</a> &copy; <span data-toggle="year-copy"></span> -->
                         </div>
                     </div>
                 </div>
@@ -498,6 +499,9 @@
 
         <!-- Laravel Scaffolding JS -->
         <script src="{{ mix('js/laravel.app.js') }}"></script>
+        <!-- toast -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript" charset="utf-8" async defer></script>
+
 
         @yield('js_after')
     </body>

@@ -50,12 +50,31 @@
                                 class="btn btn-sm btn-primary" data-toggle="tooltip" title="Sửa">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </a>
-                            <a href="{{route('deleteCategori', $data->id)}}" type="button" class="btn btn-sm btn-danger"
-                                data-toggle="tooltip" title="Xóa">
+
+
+                            <a href="#" style="padding: 3px 7px;" data-toggle="modal" data-toggle="tooltip" data-target="#delete{{$data->id}}"class="btn btn-danger">
                                 <i class="fa fa-fw fa-times"></i>
                             </a>
+
                         </td>
                     </tr>
+                    <div class="modal fade" id="delete{{$data->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">Bạn chắc chắn muốn xoá không ?</div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                    <a class="btn btn-danger" href="{{route('deleteCategori', $data->id)}}">Delete</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 @endforeach
             </tbody>
         </table>
@@ -80,6 +99,11 @@
             });
         });
     });
+    //bat su kien id= demo di ong
+    // $('#demo').click(function() {
+    //     alert('oke');
+    // });
+
 </script>
 
 @stop

@@ -27,7 +27,7 @@ class ClientBookingController extends Controller
 
     $html = '';
     $date = $request->date;
-    $timeslot = TimeSlot::all();
+    $timeslot = TimeSlot::select('*')->orderBy('id', 'DESC')->get();
 
     $booking = Booking::select('id_time')->where('book_date', $date)->get();
 
@@ -66,8 +66,7 @@ class ClientBookingController extends Controller
                             </div>';
       }
     }
-    $time = TimeSlot::where('id', 3)->get();
-    return response()->json(['html' => $html, 'time' => $time[0]->time]);
+    return response()->json(['html' => $html]);
   }
 
 

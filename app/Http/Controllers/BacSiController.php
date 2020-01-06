@@ -6,6 +6,7 @@ use App\Khoa;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class BacSiController extends Controller {
     public function getALL() {
@@ -61,6 +62,7 @@ class BacSiController extends Controller {
         $dataCreate->gender = $request->gioitinh;
         $dataCreate->address = $request->diachi;
         $dataCreate->birthday = $request->birthday;
+        $dataCreate->password = Hash::make($request->email);
         if($dataCreate->save()){
             return redirect()->route('danhsachnhanvien')->with('message', 'success');
         }
@@ -81,6 +83,7 @@ class BacSiController extends Controller {
         $dataUp->address = $request->address;
         $dataUp->birthday = $request->birthday;
         $dataUp->gender = $request->gender;
+        // $dataUp->password = Hash::make($request->email);
 
         if ($dataUp->save()) {
             return redirect()->route('danhsachnhanvien')->with('message', 'success');

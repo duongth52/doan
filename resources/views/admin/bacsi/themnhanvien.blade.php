@@ -49,7 +49,7 @@
                     </div>
                     <div class="form-group">
                         <label style="display:block">Ngày sinh <span class="text-danger">*</span></label>
-                        <input type="text" class="js-datepicker form-control" id="example-datepicker2" name="birthday" data-week-start="1" data-autoclose="true" data-today-highlight="true" data-date-format="dd/mm/yy" placeholder="dd/mm/yy">
+                        <input type="date" name="birthday" placeholder="dd/mm/yy">
                         @foreach($errors->get('ngaysinh') as $error)
                         <div class="alert alert-danger">
                             {{ $error }}

@@ -142,7 +142,7 @@
                                 </a>
                                 <!-- Agent content -->
                                 <div class="agent-content">
-                                    <h5><a href="agent-single.html">{{$data->name}}</a></h5>
+                                    <h5><a href="{{route('showDetailDoctor', $data->id)}}">{{$data->name}}</a></h5>
                                     <h6>{{$data->subDescription}}</h6>
                                     <ul class=" social-list clearfix">
                                         <li>

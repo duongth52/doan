@@ -16,6 +16,7 @@ Route::post('/ajaxBooking', 'ClientBookingController@sendMailBooking');
 Route::get('/xem-ket-qua-kham','ClientBookingController@showResult' )->name('xemketqua');
 Route::get('/getResult','ClientBookingController@getResult');
 Route::get('/xem-chi-tiet-ket-qua/{id}','ClientBookingController@showResultClient')->name('showResultClient');
+Route::get('/thong-tin-bac-si/{id}','ClientHomeController@showDetailDoctor')->name('showDetailDoctor');
 
 
 Route::get('/login', 'AdminLoginController@showLogin')->name('showLogin');
@@ -35,7 +36,7 @@ Route::group([
     //booking
     Route::get('/danh-sach-booking', 'bookingController@index')->name('danhsachBooking');
     Route::view('/them-booking', 'admin.booking.thembooking')->name('themBooing');
-    //Route::get('/danh-sach-booking-day', 'bookingControlleradmin.booking.thembooking')->name('getBookingDay');
+    Route::get('/danh-sach-booking-today', 'bookingController@listBookingToday')->name('listBookingToDay');
     Route::get('/them-moi-patient/{id}', 'bookingController@createPaitent')->name('createPaitentBooking');
     Route::get('/xoa-booking/{id}', 'bookingController@delete')->name('deleteBooking');
 

@@ -22,7 +22,7 @@
                             @endforeach
                         </ul>
                     </div>
-                @endif
+                    @endif
                     @csrf
                     <div class="form-group">
                         <input type="email" name="email" class="input-text" placeholder="Email Address">
