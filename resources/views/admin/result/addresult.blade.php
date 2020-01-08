@@ -1,11 +1,29 @@
 @extends('layouts.backend')
 
 @section('css_after')
+<link rel="stylesheet" href="{{asset('/js/plugins/select2/css/select2.min.css') }}">
 <link rel="stylesheet" href="{{asset('/js/plugins/summernote/summernote-bs4.css') }}">
 <link rel="stylesheet" href="{{asset('/js/plugins/simplemde/simplemde.min.css') }}">
 @stop
 
 @section('content')
+
+<style>
+    #disease {
+        display: none
+    }
+
+    .hiddenSelector {
+        display: none
+    }
+    .showSelector {
+        display: block
+    }
+    .select2-selection--single {
+        height: calc(1.5em + .75rem + 2px) !important;
+    }
+</style>
+
 
 <div class="block" style="margin-bottom: 0px; height: 100%;">
     <div class="block-header">
@@ -21,24 +39,44 @@
             <p style="margin: 0px auto; border: 1px solid blue; width: 8%;"></p>
         </div>
         @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-        <form method="post" action="{{route('createResult')}}" enctype="multipart/form-data">
+                @endforeach
+            </ul>
+        </div>
+        @endif
 
+        <form method="post" action="{{route('createResult')}}" enctype="multipart/form-data">
             @csrf
             <div class="row" style="min-width:100%; margin-top: 30px">
 
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Tên bệnh<span class="text-danger">*</span></label>
-                        <div>
-                            <textarea class="w-100" style="height: 130px" name="content_result"></textarea>
+                        <div id="selector-disease" style="margin-bottom: 16px">
+                            <select  class="js-select2 form-control" id="val-select2" name="diseaseName" style="width: 100%;" data-placeholder="Chọn bệnh">
+                                <option></option>
+                                @foreach ($diseaseName as $name)
+                                <option value="{{$name->id}}">{{$name->name}}</option>
+                                @endforeach
+                            </select>
+                            <!-- <textarea class="w-100" style="height: 130px" name="content_result"></textarea> -->
+                        </div>
+                        <div style="margin-bottom: 16px">
+                            <a style="color: white" class="btn btn-info disease-toggle" id="#disease">Thêm bệnh</a>
+                            <div id="disease" style="margin-top: 16px">
+                                <label>Tên khoa<span class="text-danger">*</span></label>
+                                <select  class="js-select2 form-control" id="val-select" name="khoa" style="width: 100%;" data-placeholder="Chọn khoa">
+                                    <option></option>
+                                    @foreach ($khoa as $k)
+                                    <option value="{{$k->id}}">{{$k->name}}</option>
+                                    @endforeach
+                                </select>
+                                <label>Tên bệnh<span class="text-danger">*</span></label>
+                                <input style="width: 100%; " type="text" class="form-control"  name="diseaseNew" placeholder="Nhập mới tên bệnh ">
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -60,11 +98,12 @@
                     </div>
                     <div class="form-group">
                         @if($patient)
-                            <label>Tên bệnh nhân</label>
+                            <label>Tên bệnh nhân <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="namePatient" value="{{$patient->name}}" readonly>
                             <input type="text" style="display: none" class="form-control" name="id_patient" value="{{$patient->id}}" readonly>
                         @else
-                            <input type="text" class="form-control" name="id_patient" placeholder="Tên người bệnh ">
+                            <label>Mã bệnh nhân <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="id_patient" placeholder="Mã bệnh nhân">
                         @endif
                     </div>
                 </div>
@@ -79,9 +118,9 @@
                     </div>
                     <div class="col-md-12">
                         <div style="float:right">
-                        <!-- <button type="submit" class="btn btn-danger" style="opacity: 0.3; color: black;"> gửi email</button>
+                            <!-- <button type="submit" class="btn btn-danger" style="opacity: 0.3; color: black;"> gửi email</button>
                         <button type="submit" class="btn btn-primary" style="opacity: 0.3; color: black;"> Sửa thông tin</button> -->
-                        <button type="submit" class="btn btn-primary"> Lưu thông tin</button>
+                            <button type="submit" class="btn btn-primary"> Lưu thông tin</button>
                         </div>
                     </div>
 
@@ -94,13 +133,44 @@
 @endsection
 
 @section('js_after')
+
 <script>
     jQuery(function() {
         One.helpers(['summernote', 'ckeditor', 'simplemde']);
+        One.helpers('select2');
     });
 </script>
+<script src=" {{ asset('/js/plugins/select2/js/select2.full.min.js') }} "></script>
+
 <script src=" {{ asset('/js/plugins/summernote/summernote-bs4.min.js') }}"></script>
 <script src=" {{ asset('/js/plugins/ckeditor/ckeditor.js') }}"></script>
 <!-- page -->
-<script src=" {{ asset('js/plugins/simplemde/simplemde.min.js') }}"></script>
+<script src=" {{ asset('/js/plugins/simplemde/simplemde.min.js') }}"></script>
+<!-- Page JS Plugins -->
+
+<script>
+    $(document).ready(function() {
+        $('.disease-toggle').click(function() {
+            //get collapse content selector
+            var collapse_content_selector = $(this).attr('id');
+
+            //make the collapse content to be shown or hide
+            var toggle_switch = $(this);
+            $(collapse_content_selector).toggle(function() {
+                if ($(this).css('display') == 'none') {
+                    //change the button label to be 'Show'
+                    toggle_switch.html('Thêm bệnh');
+                    $('#selector-disease').addClass("showSelector").removeClass("hiddenSelector")
+
+                } else {
+                    //change the button label to be 'Hide'
+                    toggle_switch.html('Ẩn thêm bệnh');
+                    console.log($('#val-select2'))
+                     $('#selector-disease').addClass("hiddenSelector").removeClass("showSelector")
+                }
+            });
+        });
+
+    });
+</script>
 @stop

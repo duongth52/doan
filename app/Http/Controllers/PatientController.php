@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Patient;
 use App\Result;
+use App\DiseaseName;
+use App\Khoa;
 
 class PatientController extends Controller
 {
@@ -83,7 +85,9 @@ class PatientController extends Controller
 
     public function showAddResult($id) {
         $patient = Patient::findOrFail($id);
-        return view('admin.result.addresult', compact('patient'));
+        $diseaseName = DiseaseName::all();
+        $khoa = Khoa::all();
+        return view('admin.result.addresult', compact('patient', 'diseaseName', 'khoa'));
 
     }
 }

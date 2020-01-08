@@ -70,12 +70,12 @@
                             <a href="{{route('doctor', $data->id)}}" style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="xem chi tiết">
                                 <i class=" far fa-eye"></i>
                             </a>
-                            <a style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="sửa">
+                            <!-- <a style="margin-right: 5px" type="button" class="btn btn-sm btn-primary" data-toggle="tooltip" title="sửa">
                                 <i class="fa fa-fw fa-pencil-alt"></i>
                             </a>
                             <a type="button" class="btn btn-sm btn-danger" data-toggle="tooltip" title="xóa">
                                 <i class="fa fa-fw fa-times"></i>
-                            </a>
+                            </a> -->
                         </div>
                     </td>
                     @endif

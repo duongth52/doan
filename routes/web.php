@@ -11,6 +11,7 @@ Route::get('/lien-he', 'ClientContactController@index')->name('contact');
 
 Route::post('/ajaxRequest', 'ClientBookingController@test');
 Route::post('/ajaxBooking', 'ClientBookingController@sendMailBooking');
+Route::get('/xoa-dat-lich/{code}', 'ClientBookingController@xoaBooking')->name('xoaBooking');
 
 //xem kết quả khám
 Route::get('/xem-ket-qua-kham','ClientBookingController@showResult' )->name('xemketqua');
@@ -86,7 +87,7 @@ Route::group([
     Route::get('/sua-ket-qua/{id}', 'ResultController@showUpdate')->name('showUpdateResult');
     Route::post('/sua-ket-qua/{id}', 'ResultController@Update')->name('updateResult');
     Route::get('/xoa-ket-qua/{id}', 'ResultController@delete')->name('deleteResult');
-
+    Route::get('/detail-result/{id}','ResultController@detail')->name('detailResult');
 
 
     //Time

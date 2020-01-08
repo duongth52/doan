@@ -62,8 +62,7 @@ class CategoriController extends Controller
         return view('admin.categories.suadanhmuc', compact('categori'));
     }
 
-    public function Update($id, Request $request)
-    {
+    public function Update($id, Request $request) {
         $pathImg = '';
         $dataUp = Categori::find($id);
 

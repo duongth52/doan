@@ -50,7 +50,7 @@
         </div>
 
         <div class="row mgn-btm wow">
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 wow fadeInLeft delay-04s">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 wow fadeInLeft delay-04s">
                 <div class="content">
                     <a href="{{route('datlich')}}">
                         <i class="flaticon-apartment"></i>
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 wow fadeInRight delay-04s">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 wow fadeInRight delay-04s">
                 <div class="content">
                     <a href="{{route('xemketqua')}}">
                         <i class="flaticon-monitor"></i>
@@ -68,12 +68,12 @@
                 </div>
             </div>
 
-            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 wow fadeInRight delay-04s">
+            <!-- <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 wow fadeInRight delay-04s">
                 <div class="content">
                     <i class="flaticon-vehicle"></i>
                     <h4>Lịch làm việc bác sĩ</h4>
                 </div>
-            </div>
+            </div> -->
 
         </div>
         <!-- <a href="#" class="btn button-md button-theme">Read More</a> -->

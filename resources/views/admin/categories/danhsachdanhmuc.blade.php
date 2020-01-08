@@ -99,10 +99,6 @@
             });
         });
     });
-    //bat su kien id= demo di ong
-    // $('#demo').click(function() {
-    //     alert('oke');
-    // });
 
 </script>
 

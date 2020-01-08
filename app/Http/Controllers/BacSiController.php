@@ -77,13 +77,14 @@ class BacSiController extends Controller {
     public function update($id, Request $request) {
         $dataUp = User::find($id);
         $dataUp->name = $request->name;
+        $dataUp->role = $request->role;
         $dataUp->phone = $request->phone;
         $dataUp->email = $request->email;
         $dataUp->image = $request->image;
         $dataUp->address = $request->address;
         $dataUp->birthday = $request->birthday;
         $dataUp->gender = $request->gender;
-        // $dataUp->password = Hash::make($request->email);
+        // /$dataUp->password = Hash::make($request->email);
 
         if ($dataUp->save()) {
             return redirect()->route('danhsachnhanvien')->with('message', 'success');

@@ -141,8 +141,12 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: function(data) {
-                console.log(data)
-                $('#timeBooking').append(data.html);
+                if(data.status === 200) {
+                    $('#timeBooking').append(data.html);
+                }else {
+                    alert('chọn ngày khám chưa chính sác')
+                }
+                console.log(data.time)
             },
             error: function(err) {
                 console.log(err);
@@ -181,9 +185,9 @@
         var note = $("#note").val();
 
 
+        if (validateEmail(email) && email) {
         if (name && email && birthday && khoa && gender && phone && bookingDate && note && id_Time) {
 
-            if (validateEmail(email)) {
                 $.ajax({
                     method: 'POST',
                     url: '/ajaxRequest',
@@ -193,7 +197,6 @@
                     dataType: 'json',
 
                     data: {
-
                         name: name,
                         email: email,
                         birthday: birthday,
@@ -203,11 +206,11 @@
                         bookingDate: bookingDate,
                         id_time: id_Time,
                         note: note
-
                     },
 
                     success: function(data) {
 
+                        console.log(data.time)
                         switch (data.status) {
                             case 200:
 
@@ -221,6 +224,7 @@
                                 );
 
                                 //send mail booking
+                                    // console.log(data)
                                 $.ajax({
                                     method: 'POST',
                                     url: '/ajaxBooking',
@@ -231,6 +235,7 @@
 
                                     data: {
                                         name: data.data.name,
+                                        code_destroy: data.data.code_destroy,
                                         date: data.data.book_date,
                                         email: data.data.email,
                                         time: data.time
@@ -243,7 +248,7 @@
                                 });
 
                                 $(".btn-booking-success").click()
-                                location.reload(true);
+                                //location.reload(true);
                                 break;
                             case 301:
                                 $("#modal-content").html(
@@ -253,15 +258,6 @@
                                 );
                                 $(".btn-booking-success").click()
                                 break;
-                            case 302:
-                                $("#modal-content").html(
-                                    "<div id=\"content-model\">"+
-                                        "<p>Bạn chọn ngày khám chưa chính xác !</p>" +
-                                    "</div>"
-                                );
-                                $(".btn-booking-success").click()
-                                break;
-
                             default:
                                 break;
                         }
@@ -271,34 +267,41 @@
                     },
                 });
             }else {
-                // /alert('Bạn nhập sai định dạng Email hoặc số điện thoại')
+
                 $("#modal-content").html(
                     "<div id=\"content-model\">"+
-                        "<p>Bạn nhập sai định dạng Email hoặc số điện thoại !</p>"+
+                        "<p>Bạn cần nhập đầy đủ thông tin !</p>"+
                     "</div>"
                 );
                 $(".btn-booking-success").click()
+                // /alert('Bạn nhập sai định dạng Email hoặc số điện thoại')
+
             }
 
         } else {
-          //  alert('Bạn cần nhập đầy đủ thông tin !')
-           $("#modal-content").html(
+            $("#modal-content").html(
                 "<div id=\"content-model\">"+
-                    "<p>Bạn cần nhập đầy đủ thông tin !</p>"+
+                    "<p>Bạn nhập sai định dạng Email hoặc số điện thoại !</p>"+
                 "</div>"
             );
             $(".btn-booking-success").click()
+          //  alert('Bạn cần nhập đầy đủ thông tin !')
+        //    $("#modal-content").html(
+        //         "<div id=\"content-model\">"+
+        //             "<p>Bạn cần nhập đầy đủ thông tin !</p>"+
+        //         "</div>"
+        //     );
+        //     $(".btn-booking-success").click()
          }
 
     });
 
     $('#closemodal').click(function() {
         if($('#content-model')){
-            console.log(111)
             $('#content-model').remove();
         }
     });
-    
+
 
 </script>
 @stop

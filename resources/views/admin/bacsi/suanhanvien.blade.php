@@ -37,13 +37,23 @@
                     </div>
                     <div class="form-group">
                         <label class="d-block">Giới tính <span class="text-danger">*</span></label>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="example-rd-custom-inline2" name="gender" value="nam"  {{$find->gender === 'nam' ? 'checked' : ''}}>
+                        <!-- <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="example-rd-custom-inline2" name="gender" value="nam" {{$find->gender === 'nam' ? 'checked' : ''}}>
                             <label class="custom-control-label">Nam </label>
                         </div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="example-rd-custom-inline3" name="gender" value="nu" {{$find->gender === 'nu' ? 'checked' : ''}}>
                             <label class="custom-control-label">Nữ</label>
+                        </div> -->
+                        <div class="d-flex">
+                            <div class="custom-control custom-radio custom-control-primary custom-control-lg mb-1">
+                                <input type="radio" class="custom-control-input" id="example-rd-custom-primary-lg2" name="gender"  value="nam" {{$find->gender === 'nam' ? 'checked' : ''}}>
+                                <label class="custom-control-label" for="example-rd-custom-primary-lg2">Nam</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-primary custom-control-lg mb-1" style="margin-left: 15px">
+                                <input type="radio" class="custom-control-input" id="example-rd-custom-primary-lg3" name="gender" value="nu" {{$find->gender === 'nu' ? 'checked' : ''}}>
+                                <label class="custom-control-label" for="example-rd-custom-primary-lg3">Nữ</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -67,9 +77,23 @@
                         <label>Khoa khám bệnh <span class="text-danger">*</span></label>
                         <select class="form-control" id="example-select" name="khoa">
                             @foreach($khoa as $data )
-                                <option value="{{$data->id}}">{{$data->name}}</option>
+                            <option value="{{$data->id}}">{{$data->name}}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <div class="custom-control custom-radio custom-control-primary custom-control-lg mb-1">
+                            <input type="radio" class="custom-control-input" id="example-rd-custom-primary-lg1" name="role" value="superadmin" {{ ($find->role=="superadmin")? "checked" : "" }}>
+                            <label class="custom-control-label" for="example-rd-custom-primary-lg1">Super Admin</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-primary custom-control-lg mb-1">
+                            <input type="radio" class="custom-control-input" id="example-rd-custom-primary-lg2" name="role"  value="admin" {{ ($find->role=="admin")? "checked" : "" }}>
+                            <label class="custom-control-label" for="example-rd-custom-primary-lg2">Admin</label>
+                        </div>
+                        <div class="custom-control custom-radio custom-control-primary custom-control-lg mb-1">
+                            <input type="radio" class="custom-control-input" id="example-rd-custom-primary-lg3" name="role" value="user" {{ ($find->role=="user")? "checked" : "" }}>
+                            <label class="custom-control-label" for="example-rd-custom-primary-lg3">User</label>
+                        </div>
                     </div>
                     <!-- <div class="form-group">
                         <label class="d-block">Quyền</label>

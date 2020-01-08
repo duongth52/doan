@@ -20,7 +20,7 @@
             <tr>
                 <td>{{$detailResult->content_result}}</td>
                 <td>{{$detailResult->description}}</td>
-                <td>{{$detailResult->prescription}}</td>
+                <td>{!!$detailResult->prescription!!}</td>
             </tr>
         </table>
         </div>

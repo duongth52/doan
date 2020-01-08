@@ -48,7 +48,7 @@
                         <td class="font-size-sm">{{$data->description}}</td>
                         <td class="font-size-sm">{{$data->created_at}}</td>
                         <td class="text-center">
-                            <a href="{{route('showUpdateResult', $data->id)}}" style="margin-right: 5px" type="button"
+                            <a href="{{route('detailResult', $data->id)}}" style="margin-right: 5px" type="button"
                                 class="btn btn-sm btn-primary" data-toggle="tooltip" title="Xem chi tiết">
                                 <i class=" far fa-eye"></i>
                             </a>
